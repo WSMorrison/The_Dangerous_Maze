@@ -1,0 +1,1 @@
+clearing screen and timing information from: https://www.geeksforgeeks.org/clear-screen-python/
