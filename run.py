@@ -2,22 +2,50 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
+def game_rules():
+    print('Game rules')
+
+
+def game_end():
+    print('Thank you, goodbye!')
+
+
+def start_game():
+    print('        Welcome to Christmas Vacation.\n')
+    print('Your entire family has been in your house for a month,')
+    print(' and you just want to get out to the garage to relax.')
+    print('     Can you get some valuable alone time')
+    print('          before having a meltdown?\n')
+
+    begin = input('Begin game? Y/N\n')
+
+    if begin == 'y':
+        game_rules()
+    elif begin == 'n':
+        game_end()
+    else:
+        print('Input must be Y or N\n')
+
+
+start_game()
+
+
 """
 GET NAME
     validate
-    length
+        length
         not blank
 
 EXPLAIN RULES
     start with 4hp
-    25 positions, one has garage door
-    relatives randomly throughout
+    25 positions, one has exit door
+    opponents randomly throughout
     ready (y/n)
         validate
             y or n only
 
 FIRST RENDER
-    decide what position garage door is
+    decide what position exit door is
     DISPLAY BOARD
 
 GAMEPLAY
@@ -28,11 +56,11 @@ GAMEPLAY
             not chosen
     change board dictionary
 
-    check if garage door
+    check if exit door
         WIN
             access spreadsheet for <win copy>
 
-    check if opponent door, ROLL D6
+    check if door is ALLY, CLEAR or OPPONENT, ROLL D6
         6 ALLY
             unless two allies chosen, then CLEAR
             access spreadsheet for <ally copy>
