@@ -16,6 +16,16 @@ def game_quit():
     print('Thank you, goodbye!')
 
 
+def string_shortener(string):
+    """
+    Shortens user input to one lowercase character
+    as first half of defensive design.
+    """
+    short_string = string[0]
+    good_string = short_string.lower()
+    return good_string
+
+
 def start_game():
     """
     Introduces game and asks user if they want to begin.
@@ -28,9 +38,9 @@ def start_game():
 
     begin = input('Begin game? Y/N\n')
 
-    if begin.lower() == 'y':
+    if string_shortener(begin) == 'y':
         game_rules()
-    elif begin.lower == 'n':
+    elif string_shortener(begin) == 'n':
         game_quit()
     else:
         print('Input must be Y or N\n')
