@@ -28,7 +28,7 @@ def start_game():
 
     begin = input('Begin game? Y/N\n')
 
-    if begin == 'y':
+    if begin.lower() == 'y':
         game_rules()
     elif begin == 'n':
         game_quit()
