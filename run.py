@@ -16,34 +16,42 @@ def game_quit():
     print('Thank you, goodbye!')
 
 
-def string_shortener(string):
+def short_string(string):
     """
     Shortens user input to one lowercase character
     as first half of defensive design.
     """
-    short_string = string[0]
-    good_string = short_string.lower()
+    shortened_string = string[0]
+    good_string = shortened_string.lower()
     return good_string
+
+
+def begin_game():
+    """
+    Ask user if they want to begin, looped in defense.
+    """
+    user_input = input('\nBegin game? Y/N\n')
+    begin = short_string(user_input)
+    if begin == 'y':
+        game_rules()
+    elif begin == 'n':
+        game_quit()
+    else:
+        print('Input must be Y or N')
+        begin_game()
 
 
 def start_game():
     """
-    Introduces game and asks user if they want to begin.
+    Introduces game and passes user to begin_game function.
     """
     print('        Welcome to Christmas Vacation.\n')
     print('Your entire family has been in your house for a month,')
     print(' and you just want to get out to the garage to relax.')
     print('     Can you get some valuable alone time')
-    print('          before having a meltdown?\n')
+    print('          before having a meltdown?')
 
-    begin = input('Begin game? Y/N\n')
-
-    if string_shortener(begin) == 'y':
-        game_rules()
-    elif string_shortener(begin) == 'n':
-        game_quit()
-    else:
-        print('Input must be Y or N\n')
+    begin_game()
 
 
 start_game()
