@@ -5,6 +5,7 @@ from os import system, name
 from time import sleep
 # Sleep(x) x is number of seconds.
 
+
 # Basic functions
 def game_quit():
     """
@@ -57,6 +58,7 @@ def game_rules():
     print('and if you roll a 6, family love and the holiday spirit')
     print('will restore you one health point.\n')
     print('Are you ready to go out into the house?')
+
     play_game()
 
 
@@ -80,24 +82,6 @@ def play_game():
         play_game()
 
 
-
-def begin_game():
-    """
-    Ask user if they want to begin, looped in defense.
-    """
-    user_input = input('\nBegin game? Y/N\n')
-    begin = short_string(user_input)
-    if begin == 'y':
-        clear_screen()
-        game_rules()
-    elif begin == 'n':
-        clear_screen()
-        game_quit()
-    else:
-        print('Input must be Y or N')
-        begin_game()
-
-
 def start_game():
     """
     Introduces game and passes user to begin_game function.
@@ -107,8 +91,9 @@ def start_game():
     print(' and you just want to get out to the garage to relax.')
     print('       Can you get some valuable alone time')
     print('            before having a meltdown?')
+    print('\nPlay the game?')
 
-    begin_game()
+    play_game()
 
 
 start_game()
