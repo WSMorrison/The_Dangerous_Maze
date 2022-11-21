@@ -19,6 +19,13 @@ def game_quit():
     print('Thank you, goodbye!')
 
 
+def game_over_lose():
+    """
+    Ends game when user loses game.
+    """
+    print("You're dead, better luck next time.")
+
+
 def short_string(string):
     """
     Shortens user input to one lowercase character
@@ -40,10 +47,22 @@ def clear_screen():
 
 
 # Game play functions
+def first_render():
+    """
+    Does the initial gameboard render
+    """
+    print('First render happens NOW')
+    global health_points
+    health_points = 5
+    print('Skipping to dice roll')
+    dice_roll()
+
+
 def dice_roll():
     """
     Rolls the D6
     """
+    global health_points
     roll = random.randint(1, 6)
     print(f'You rolled a {roll}')
     if roll < 5:
@@ -57,18 +76,16 @@ def dice_roll():
     else:
         print('Error rolling.')
         dice_roll()
-    print('OVER')
+    
+    did_you_die_though()
 
 
-def first_render():
-    """
-    Does the initial gameboard render
-    """
-    print('First render happens NOW')
-    health_points = 5
-    print('Skipping to dice roll')
-    dice_roll()
-
+def did_you_die_though():
+    global health_points
+    if health_points > 0:
+        print('Yer still kickin')
+    if health_points == 0:
+        print('You ded')
 
 # Pregame
 def play_game():
