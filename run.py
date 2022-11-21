@@ -4,6 +4,11 @@
 from os import system, name
 from time import sleep
 # Sleep(x) x is number of seconds.
+import random
+
+
+# Global variables
+health_points = 0
 
 
 # Basic functions
@@ -34,6 +39,58 @@ def clear_screen():
         _ = system('clear')
 
 
+# Game play functions
+def dice_roll():
+    """
+    Rolls the D6
+    """
+    roll = random.randint(1, 6)
+    print(f'You rolled a {roll}')
+    if roll < 5:
+        health_points = health_points - 1
+        print(f'HP -1. Your HP are now {health_points}')
+    elif roll == 5:
+        print(f'HP remain the same. Your HP remain {health_points}')
+    elif roll == 6:
+        health_points = health_points + 1
+        print(f'HP +1. Your HP are now {health_points}')
+    else:
+        print('Error rolling.')
+        dice_roll()
+    print('OVER')
+
+
+def first_render():
+    """
+    Does the initial gameboard render
+    """
+    print('First render happens NOW')
+    health_points = 5
+    print('Skipping to dice roll')
+    dice_roll()
+
+
+# Pregame
+def play_game():
+    """
+    Ask user if they want to begin, looped in defense.
+    """
+    user_input = input('Y/N/E E for exit.\n')
+    play = short_string(user_input)
+    if play == 'y':
+        clear_screen()
+        first_render()
+    elif play == 'n':
+        clear_screen()
+        game_quit()
+    elif play == 'e':
+        clear_screen()
+        game_quit()
+    else:
+        print('Input must be Y or N or E')
+        play_game()
+
+
 def game_rules():
     """
     Explains game rules, gets user name, and begins gameplay.
@@ -47,7 +104,8 @@ def game_rules():
     print('they all look the same.')
     print('Try a door, and see if it leads to the garage.\n')
     print('...loading...')
-    sleep(10)
+# DONT FORGET TO CHANGE THE SLEEP TO 10 FOR 1O SECONDS!!!!!!!!
+    sleep(1)
     clear_screen()
     print('Try a door, and see if it leads to the garage.')
     print('Behind the door, you may find freedom....\n')
@@ -62,7 +120,7 @@ def game_rules():
     play_game()
 
 
-def play_game():
+def begin_game():
     """
     Ask user if they want to begin, looped in defense.
     """
@@ -70,7 +128,7 @@ def play_game():
     play = short_string(user_input)
     if play == 'y':
         clear_screen()
-        print('Game has begun.')
+        game_rules()
     elif play == 'n':
         clear_screen()
         game_quit()
@@ -79,13 +137,14 @@ def play_game():
         game_quit()
     else:
         print('Input must be Y or N or E')
-        play_game()
+        begin_game()
 
 
 def start_game():
     """
     Introduces game and passes user to begin_game function.
     """
+    clear_screen()
     print('          Welcome to Christmas Vacation.\n')
     print('Your entire family has been in your house for a month,')
     print(' and you just want to get out to the garage to relax.')
@@ -93,7 +152,7 @@ def start_game():
     print('            before having a meltdown?')
     print('\nPlay the game?')
 
-    play_game()
+    begin_game()
 
 
 start_game()
