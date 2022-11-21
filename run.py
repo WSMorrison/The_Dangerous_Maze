@@ -16,7 +16,7 @@ def game_quit():
     """
     Ends game when user selects to quit.
     """
-    print('Thank you, goodbye!')
+    print('\nThank you, goodbye!\n')
 
 
 def game_over_lose():
@@ -31,7 +31,8 @@ def short_string(string):
     Shortens user input to one lowercase character
     as first half of defensive design.
     """
-    shortened_string = string[0]
+    nonblank_string = string + 'x'
+    shortened_string = nonblank_string[0]
     good_string = shortened_string.lower()
     return good_string
 
@@ -54,7 +55,8 @@ def first_render():
     print('First render happens NOW')
     global health_points
     health_points = 5
-    print('Skipping to dice roll')
+    print('Skipping to dice roll\n')
+
     dice_roll()
 
 
@@ -72,20 +74,45 @@ def dice_roll():
         print(f'HP remain the same. Your HP remain {health_points}')
     elif roll == 6:
         health_points = health_points + 1
-        print(f'HP +1. Your HP are now {health_points}')
+        print(f'HP +1. Your HP is now {health_points}')
     else:
         print('Error rolling.')
         dice_roll()
-    
+
     did_you_die_though()
 
 
 def did_you_die_though():
+    """
+    Decides if player has lost or will continue playing.
+    """
     global health_points
     if health_points > 0:
-        print('Yer still kickin')
+        continue_game()
     if health_points == 0:
-        print('You ded')
+        game_over_lose()
+
+
+def continue_game():
+    """
+    Ask user if they want to begin, looped in defense.
+    """
+    print('\nContinue?')
+    user_input = input('Y/N/E E for exit.\n')
+    play = short_string(user_input)
+    if play == 'y':
+        clear_screen()
+        dice_roll()
+    elif play == 'n':
+        clear_screen()
+        game_quit()
+    elif play == 'e':
+        clear_screen()
+        game_quit()
+    else:
+        print('Input must be Y or N or E')
+        continue_game()
+
 
 # Pregame
 def play_game():
@@ -121,7 +148,7 @@ def game_rules():
     print('they all look the same.')
     print('Try a door, and see if it leads to the garage.\n')
     print('...loading...')
-# DONT FORGET TO CHANGE THE SLEEP TO 10 FOR 1O SECONDS!!!!!!!!
+# DONT FORGET TO CHANGE THE SLEEP TO 10 FOR 10 SECONDS!!!!!!!!
     sleep(1)
     clear_screen()
     print('Try a door, and see if it leads to the garage.')
@@ -162,11 +189,11 @@ def start_game():
     Introduces game and passes user to begin_game function.
     """
     clear_screen()
-    print('          Welcome to Christmas Vacation.\n')
+    print('Welcome to Christmas Vacation.\n')
     print('Your entire family has been in your house for a month,')
-    print(' and you just want to get out to the garage to relax.')
-    print('       Can you get some valuable alone time')
-    print('            before having a meltdown?')
+    print('and you just want to get out to the garage to relax.')
+    print('Can you get some valuable alone time')
+    print('before having a meltdown?')
     print('\nPlay the game?')
 
     begin_game()
