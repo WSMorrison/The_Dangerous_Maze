@@ -7,11 +7,11 @@ from time import sleep
 import random
 
 
-# Global variables
+# Global variables -----------------------------------------------------
 health_points = 0
 
 
-# Basic functions
+# Basic functions ------------------------------------------------------
 def game_quit():
     """
     Ends game when user selects to quit.
@@ -23,7 +23,7 @@ def game_over_lose():
     """
     Ends game when user loses game.
     """
-    print("You're dead, better luck next time.")
+    print("You didn't make it, better luck next time.")
 
 
 def short_string(string):
@@ -47,14 +47,16 @@ def clear_screen():
         _ = system('clear')
 
 
-# Game play functions
+# Game play functions ---------------------------------------------------
 def first_render():
     """
     Does the initial gameboard render
     """
-    print('First render happens NOW')
     global health_points
     health_points = 5
+    print('First render happens HERE')
+# Skipping straight to dice roll for funtion testing.
+# Will need to advance to selecting a door from here.
     print('Skipping to dice roll\n')
 
     dice_roll()
@@ -89,13 +91,17 @@ def did_you_die_though():
     global health_points
     if health_points > 0:
         continue_game()
-    if health_points == 0:
+    elif health_points == 0:
         game_over_lose()
+    else:
+        print('Fatal error')
+        game_quit()
 
 
 def continue_game():
     """
     Ask user if they want to begin, looped in defense.
+    Y/N/E INPUT, REFACTOR????????????????????????????
     """
     print('\nContinue?')
     user_input = input('Y/N/E E for exit.\n')
@@ -114,10 +120,11 @@ def continue_game():
         continue_game()
 
 
-# Pregame
+# Pregame ----------------------------------------------------------------
 def play_game():
     """
     Ask user if they want to begin, looped in defense.
+    Y/N/E INPUT, REFACTOR????????????????????????????
     """
     user_input = input('Y/N/E E for exit.\n')
     play = short_string(user_input)
@@ -167,6 +174,7 @@ def game_rules():
 def begin_game():
     """
     Ask user if they want to begin, looped in defense.
+    Y/N/E INPUT, REFACTOR????????????????????????????
     """
     user_input = input('Y/N/E E for exit.\n')
     play = short_string(user_input)
@@ -198,5 +206,5 @@ def start_game():
 
     begin_game()
 
-
+# First call ------------------------------------------------
 start_game()
