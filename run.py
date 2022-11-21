@@ -42,11 +42,43 @@ def game_rules():
     print('and you are disoriented by the blinking, colored lights')
     print('and the strong smells from the scented candles.\n')
     print('All the doors in the house are closed,')
-    print('and honestly all look the same.')
-    print('Try a door, and see if it leads to the garage.')
+    print('and like this is a bad dream,')
+    print('they all look the same.')
+    print('Try a door, and see if it leads to the garage.\n')
+    print('...loading...')
     sleep(10)
     clear_screen()
-    print('More')
+    print('Try a door, and see if it leads to the garage.')
+    print('Behind the door, you may find freedom....\n')
+    print('...or you may find a needy family member.\n')
+    print('You will get to roll a D6')
+    print('1-4, you lose a health point!')
+    print('5, you escape unscathed,')
+    print('and if you roll a 6, family love and the holiday spirit')
+    print('will restore you one health point.\n')
+    print('Are you ready to go out into the house?')
+    play_game()
+
+
+def play_game():
+    """
+    Ask user if they want to begin, looped in defense.
+    """
+    user_input = input('Y/N/E E for exit.\n')
+    play = short_string(user_input)
+    if play == 'y':
+        clear_screen()
+        print('Game has begun.')
+    elif play == 'n':
+        clear_screen()
+        game_quit()
+    elif play == 'e':
+        clear_screen()
+        game_quit()
+    else:
+        print('Input must be Y or N or E')
+        play_game()
+
 
 
 def begin_game():
