@@ -9,6 +9,7 @@ import random
 
 # Global variables -----------------------------------------------------
 health_points = 0
+attempts = 0
 
 
 # Basic functions ------------------------------------------------------
@@ -40,9 +41,11 @@ def continue_game(next_function):
     Y/N/E input asking user if user wants
     to advance to the next activity.
     """
+    global attempts
     user_input = input('Y/N/E E for exit.\n')
     play = short_string(user_input)
     if play == 'y':
+        attempts = 0
         clear_screen()
         if next_function == 'rules':
             game_rules()
@@ -60,8 +63,16 @@ def continue_game(next_function):
         clear_screen()
         game_quit()
     else:
-        print('Input must be Y or N or E.')
-        continue_game(next_function)
+        attempts = attempts + 1
+        if attempts < 6:
+            print('Input must be Y or N or E.')
+            continue_game(next_function)
+        elif attempts == 6:
+            print('Too many attempts.')
+            game_quit()
+        else:
+            print('Fatal error.')
+            game_quit()
 
 
 def game_quit():
