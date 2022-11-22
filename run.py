@@ -90,7 +90,7 @@ def did_you_die_though():
     """
     global health_points
     if health_points > 0:
-        continue_game()
+        continue_game('dice')
     elif health_points == 0:
         game_over_lose()
     else:
@@ -98,17 +98,25 @@ def did_you_die_though():
         game_quit()
 
 
-def continue_game():
+def continue_game(next_function):
     """
-    Ask user if they want to begin, looped in defense.
-    Y/N/E INPUT, REFACTOR????????????????????????????
+    Y/N/E input asking user if they want
+    to advance to the next activity.
     """
     print('\nContinue?')
     user_input = input('Y/N/E E for exit.\n')
     play = short_string(user_input)
     if play == 'y':
         clear_screen()
-        dice_roll()
+        if next_function == 'dice':
+            dice_roll()
+        elif next_function == 'first':
+            first_render()
+        elif next_function == 'rules':
+            game_rules()
+        else:
+            print('Oops, there was an error')
+            game_quit()
     elif play == 'n':
         clear_screen()
         game_quit()
@@ -117,29 +125,7 @@ def continue_game():
         game_quit()
     else:
         print('Input must be Y or N or E')
-        continue_game()
-
-
-# Pregame ----------------------------------------------------------------
-def play_game():
-    """
-    Ask user if they want to begin, looped in defense.
-    Y/N/E INPUT, REFACTOR????????????????????????????
-    """
-    user_input = input('Y/N/E E for exit.\n')
-    play = short_string(user_input)
-    if play == 'y':
-        clear_screen()
-        first_render()
-    elif play == 'n':
-        clear_screen()
-        game_quit()
-    elif play == 'e':
-        clear_screen()
-        game_quit()
-    else:
-        print('Input must be Y or N or E')
-        play_game()
+        continue_game(next_function)
 
 
 def game_rules():
@@ -168,28 +154,7 @@ def game_rules():
     print('will restore you one health point.\n')
     print('Are you ready to go out into the house?')
 
-    play_game()
-
-
-def begin_game():
-    """
-    Ask user if they want to begin, looped in defense.
-    Y/N/E INPUT, REFACTOR????????????????????????????
-    """
-    user_input = input('Y/N/E E for exit.\n')
-    play = short_string(user_input)
-    if play == 'y':
-        clear_screen()
-        game_rules()
-    elif play == 'n':
-        clear_screen()
-        game_quit()
-    elif play == 'e':
-        clear_screen()
-        game_quit()
-    else:
-        print('Input must be Y or N or E')
-        begin_game()
+    continue_game('first')
 
 
 def start_game():
@@ -204,7 +169,8 @@ def start_game():
     print('before having a meltdown?')
     print('\nPlay the game?')
 
-    begin_game()
+    continue_game('rules')
+
 
 # First call ------------------------------------------------
 start_game()
