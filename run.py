@@ -160,6 +160,7 @@ def oppo_or_not():
     Decides if there is an opponent behind the door,
     or if door is clear.
     """
+    global attempts
     roll = random.randint(1, 6)
     if roll < 6:
 # Opponent copy goes here!
@@ -170,6 +171,16 @@ def oppo_or_not():
         print('Room is clear! Take a breath and get back out there.')
         print('\nChoose another door?')
         continue_game('oppo')
+    else:
+        attempts = attempts + 1
+        if attempts < 5:
+            print('Error rolling.')
+            dice_roll()
+        elif attempts == 5:
+            print('Too many attempts.')
+            error_end()
+        else:
+            error_end()
 
 
 def dice_roll():
@@ -201,7 +212,7 @@ def dice_roll():
             dice_roll()
         elif attempts == 5:
             print('Too many attempts.')
-            game_quit()
+            error_end()
         else:
             error_end()
 
