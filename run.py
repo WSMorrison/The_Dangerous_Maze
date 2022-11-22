@@ -53,6 +53,8 @@ def continue_game(next_function):
             first_render()
         elif next_function == 'oppo':
             oppo_or_not()
+        elif next_function == 'rere':
+            re_render()
         elif next_function == 'dice':
             dice_roll()
         else:
@@ -175,7 +177,7 @@ def oppo_or_not():
         attempts = attempts + 1
         if attempts < 5:
             print('Error rolling.')
-            dice_roll()
+            oppo_or_not()
         elif attempts == 5:
             print('Too many attempts.')
             error_end()
@@ -225,12 +227,16 @@ def did_you_die_though():
     """
     global health_points
     if health_points > 0:
-        continue_game('oppo')
+        continue_game('rere')
     elif health_points == 0:
         game_over_lose()
     else:
         print('Fatal error')
         game_quit()
+
+def re_render():
+    print('Rerender happens here!')
+    oppo_or_not()
 
 
 # First call ------------------------------------------------
