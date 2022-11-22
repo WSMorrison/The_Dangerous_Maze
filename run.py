@@ -54,8 +54,7 @@ def continue_game(next_function):
         elif next_function == 'dice':
             dice_roll()
         else:
-            print('Oops, there was an error.')
-            game_quit()
+            error_end()
     elif play == 'n':
         clear_screen()
         game_quit()
@@ -64,15 +63,22 @@ def continue_game(next_function):
         game_quit()
     else:
         attempts = attempts + 1
-        if attempts < 6:
+        if attempts < 5:
             print('Input must be Y or N or E.')
             continue_game(next_function)
-        elif attempts == 6:
+        elif attempts == 5:
             print('Too many attempts.')
             game_quit()
         else:
-            print('Fatal error.')
-            game_quit()
+            error_end()
+
+
+def error_end():
+    """
+    Ends game due to an error.
+    """
+    print('\nThere was an unrecoverable error.')
+    game_quit()
 
 
 def game_quit():
@@ -152,6 +158,7 @@ def dice_roll():
     Rolls the D6
     """
     global health_points
+    global attempts
     roll = random.randint(1, 6)
     print(f'You rolled a {roll}.')
     if roll < 5:
@@ -166,8 +173,15 @@ def dice_roll():
         print(f'HP +1. Your HP is now {health_points}.')
         print('\nChoose another door?')
     else:
-        print('Error rolling.')
-        dice_roll()
+        attempts = attempts + 1
+        if attempts < 5:
+            print('Error rolling.')
+            dice_roll()
+        elif attempts == 5:
+            print('Too many attempts.')
+            game_quit()
+        else:
+            error_end()
 
     did_you_die_though()
 
