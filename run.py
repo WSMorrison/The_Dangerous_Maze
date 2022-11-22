@@ -51,6 +51,8 @@ def continue_game(next_function):
             game_rules()
         elif next_function == 'first':
             first_render()
+        elif next_function == 'oppo':
+            oppo_or_not()
         elif next_function == 'dice':
             dice_roll()
         else:
@@ -141,21 +143,38 @@ def game_rules():
 
 def first_render():
     """
-    Does the initial gameboard render
+    Does the initial gameboard render.
     """
     global health_points
     health_points = 5
     print('SYSTEM: First render happens here.')
-# Skipping straight to dice roll for funtion testing.
+# Skipping ahead for funtion testing.
 # Will need to advance to selecting a door from here.
-    print('SYSTEM: Skipping to dice roll.\n')
+    print('SYSTEM: Skipping to opponent selector.\n')
 
-    dice_roll()
+    oppo_or_not()
+
+
+def oppo_or_not():
+    """
+    Decides if there is an opponent behind the door,
+    or if door is clear.
+    """
+    roll = random.randint(1, 6)
+    if roll < 6:
+# Opponent copy goes here!
+        print('There is an opponent!')
+        print('\nReady to battle?')
+        continue_game('dice')
+    elif roll == 6:
+        print('Room is clear! Take a breath and get back out there.')
+        print('\nChoose another door?')
+        continue_game('oppo')
 
 
 def dice_roll():
     """
-    Rolls the D6
+    Rolls the D6.
     """
     global health_points
     global attempts
@@ -163,14 +182,17 @@ def dice_roll():
     print(f'You rolled a {roll}.')
     if roll < 5:
         health_points = health_points - 1
-        print(f'HP -1. Your HP are now {health_points}.')
+# Outcome copy goes here!
+        print(f'You lose one health point! You have {health_points}.')
         print('\nChoose another door?')
     elif roll == 5:
-        print(f'HP remain the same. Your HP remain {health_points}.')
+# Outcome copy goes here!
+        print(f'Your health points remain the same. You have {health_points}.')
         print('\nChoose another door?')
     elif roll == 6:
+# Outcome copy goes here!
         health_points = health_points + 1
-        print(f'HP +1. Your HP is now {health_points}.')
+        print(f'You gain one health point! You have {health_points}.')
         print('\nChoose another door?')
     else:
         attempts = attempts + 1
@@ -192,7 +214,7 @@ def did_you_die_though():
     """
     global health_points
     if health_points > 0:
-        continue_game('dice')
+        continue_game('oppo')
     elif health_points == 0:
         game_over_lose()
     else:
