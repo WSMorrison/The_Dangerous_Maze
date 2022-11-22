@@ -53,7 +53,7 @@ def continue_game(next_function):
             first_render()
         elif next_function == 'oppo':
             oppo_or_not()
-        elif next_function == 'rere':
+        elif next_function == 'reren':
             re_render()
         elif next_function == 'dice':
             dice_roll()
@@ -227,12 +227,13 @@ def did_you_die_though():
     """
     global health_points
     if health_points > 0:
-        continue_game('rere')
+        continue_game('reren')
     elif health_points == 0:
         game_over_lose()
     else:
         print('Fatal error')
         game_quit()
+
 
 def re_render():
     print('Rerender happens here!')
