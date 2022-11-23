@@ -149,7 +149,10 @@ def first_render():
     """
     global health_points
     health_points = 5
-    print('SYSTEM: First render happens here.')
+    board = {'A': [1, 2, 3, 4, 5], 'B': [1, 2, 3, 4, 5], 'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
+    print(f'Column: {board.keys()}')
+    for row in board:
+        print(f'Row {row}: {board[row]}')
 # Skipping ahead for funtion testing.
 # Will need to advance to selecting a door from here.
     print('SYSTEM: Skipping to opponent selector.\n')
