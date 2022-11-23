@@ -12,6 +12,7 @@ health_points = 0
 attempts = 0
 turn = 0
 door = []
+exit_door = []
 board = {}
 
 
@@ -229,6 +230,10 @@ def first_render():
     global turn
     turn = 1
     global board
+    global exit_door
+    exit_row = chr(random.randint(65, 69))
+    exit_pos = random.randint(1, 5)
+    exit_door = [exit_row, exit_pos]
     board = {'A': [1, 2, 3, 4, 5], 'B': [1, 2, 3, 4, 5],
                 'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
     board_render()
@@ -243,16 +248,36 @@ def get_door():
     """
     User selects door to open
     """
-    global door
+    global user_door
     board_render()
     print('Select a door.')
     d_r = door_row()
     d_p = door_pos()
-    door = [d_r, d_p]
-    print(door)
-
+    user_door = [d_r, d_p]
     clear_screen()
-    oppo_or_not()
+
+    check_door()
+
+
+def check_door():
+    """
+    Checks if user guessed the exit door.
+    """
+    global user_door
+    global exit_door
+    print(f'User door: {user_door}')
+    print(f'Exit door: {exit_door}')
+    sleep(5)
+    if user_door == exit_door:
+        clear_screen()
+        print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
+        print('You win you win you fucking legend!')
+        print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
+        game_quit()
+    else:
+        clear_screen()
+        
+        oppo_or_not()
 
 
 def oppo_or_not():
