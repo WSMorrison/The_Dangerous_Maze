@@ -11,9 +11,12 @@ import random
 health_points = 0
 attempts = 0
 turn = 0
-door = []
+selected_row = ''
+selected_pos = 0
+user_door = []
 exit_door = []
 board = {}
+guessed_doors = []
 
 
 # Basic functions ------------------------------------------------------
@@ -187,11 +190,12 @@ def door_row():
     Gets row assignment for door selection
     """
     global attempts
+    global selected_row
     rows = ['A', 'B', 'C', 'D', 'E']
     user_row = input('Input row. Q for Quit.\n')
     row_string = short_string(user_row)
     if row_string in rows:
-        return row_string
+        selected_row = row_string
     elif row_string == 'Q':
         game_quit()
     else:
@@ -211,11 +215,12 @@ def door_pos():
     Gets position assignment for door selection
     """
     global attempts
+    global selected_pos
     user_pos = input('Input position. Q for Quit.\n')
     if user_pos.isdigit():
         pos_num = int(user_pos)
         if 1 <= pos_num <= 5:
-            return pos_num
+            selected_pos = pos_num
         else:
             print('Enter valid position, or Q for Quit.')
             door_pos()
@@ -249,12 +254,23 @@ def get_door():
     User selects door to open
     """
     global user_door
+    global selected_row
+    global selected_pos
+    global guessed_doors
     board_render()
     print('Select a door.')
-    row = door_row()
-    pos = door_pos()
+    door_row()
+    door_pos()
+    row = selected_row
+    pos = selected_pos
     user_door = [row, pos]
-    clear_screen()
+    if user_door in guessed_doors:
+        print(f'You have already tried {user_door}.')
+        print('Give it another try.')
+        get_door()
+    else:
+        guessed_doors.append(user_door)
+        clear_screen()
 
     check_door()
 
@@ -265,8 +281,10 @@ def check_door():
     """
     global user_door
     global exit_door
+    global guessed_doors
     print(f'User door: {user_door}')
     print(f'Exit door: {exit_door}')
+    print(f'Guessed: {guessed_doors}')
     sleep(5)
     if user_door == exit_door:
         clear_screen()
@@ -287,8 +305,9 @@ def oppo_or_not():
     """
     global turn
     global attempts
+    global user_door
     board_render()
-    print(f'You chose {door}')
+    print(f'You chose {user_door}')
     roll = random.randint(1, 6)
     if roll < 6:
         # Opponent copy goes here!
