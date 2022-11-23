@@ -90,68 +90,6 @@ def board_render():
         print(f'Row {row}: {board[row]}')
 
 
-def door_row():
-    """
-    Gets row assignment for door selection
-    """
-    global attempts
-    rows = ['A', 'B', 'C', 'D', 'E']
-    user_row = input('Input row. Q for Quit.\n')
-    row_string = short_string(user_row)
-    if row_string in rows:
-        return row_string
-    elif row_string == 'Q':
-        game_quit()
-    else:
-        attempts = attempts + 1
-        if attempts < 5:
-            print('Pick a valid row, or Q for quit.')
-            door_row()
-        elif attempts == 5:
-            print('Too many attempts.')
-            game_quit()
-        else:
-            error_end()
-
-
-def door_pos():
-    """
-    Gets position assignment for door selection
-    """
-    global attempts
-    user_pos = input('Input position. Q for Quit.\n')
-    if user_pos.isdigit():
-        pos_num = int(user_pos)
-        if 1 <= pos_num <= 5:
-            return pos_num
-        else:
-            print('Enter valid position, or Q for Quit.')
-            door_pos()
-    elif user_pos.isalpha():
-        if short_string(user_pos) == 'Q':
-            game_quit()
-        else:
-            attempts = attempts + 1
-            if attempts < 5:
-                print('Enter valid position or Q for Quit.')
-                door_pos()
-            elif attempts == 5:
-                print('Too many attempts.')
-                game_quit()
-            else:
-                error_end()
-    else:
-        attempts = attempts + 1
-        if attempts < 5:
-            print('Enter valid position or Q for Quit.')
-            door_pos()
-        elif attempts == 5:
-            print('Too many attempts.')
-            game_quit()
-        else:
-            error_end()
-
-
 def error_end():
     """
     Ends game due to an error.
@@ -244,6 +182,68 @@ def first_render():
     continue_game('door')
 
 
+def door_row():
+    """
+    Gets row assignment for door selection
+    """
+    global attempts
+    rows = ['A', 'B', 'C', 'D', 'E']
+    user_row = input('Input row. Q for Quit.\n')
+    row_string = short_string(user_row)
+    if row_string in rows:
+        return row_string
+    elif row_string == 'Q':
+        game_quit()
+    else:
+        attempts = attempts + 1
+        if attempts < 5:
+            print('Pick a valid row, or Q for quit.')
+            door_row()
+        elif attempts == 5:
+            print('Too many attempts.')
+            game_quit()
+        else:
+            error_end()
+
+
+def door_pos():
+    """
+    Gets position assignment for door selection
+    """
+    global attempts
+    user_pos = input('Input position. Q for Quit.\n')
+    if user_pos.isdigit():
+        pos_num = int(user_pos)
+        if 1 <= pos_num <= 5:
+            return pos_num
+        else:
+            print('Enter valid position, or Q for Quit.')
+            door_pos()
+    elif user_pos.isalpha():
+        if short_string(user_pos) == 'Q':
+            game_quit()
+        else:
+            attempts = attempts + 1
+            if attempts < 5:
+                print('Enter valid position or Q for Quit.')
+                door_pos()
+            elif attempts == 5:
+                print('Too many attempts.')
+                game_quit()
+            else:
+                error_end()
+    else:
+        attempts = attempts + 1
+        if attempts < 5:
+            print('Enter valid position or Q for Quit.')
+            door_pos()
+        elif attempts == 5:
+            print('Too many attempts.')
+            game_quit()
+        else:
+            error_end()
+
+
 def get_door():
     """
     User selects door to open
@@ -251,9 +251,9 @@ def get_door():
     global user_door
     board_render()
     print('Select a door.')
-    d_r = door_row()
-    d_p = door_pos()
-    user_door = [d_r, d_p]
+    row = door_row()
+    pos = door_pos()
+    user_door = [row, pos]
     clear_screen()
 
     check_door()
@@ -276,7 +276,7 @@ def check_door():
         game_quit()
     else:
         clear_screen()
-        
+
         oppo_or_not()
 
 
@@ -325,15 +325,15 @@ def dice_roll():
     print(f'You rolled a {roll}.')
     if roll < 5:
         health_points = health_points - 1
-# Outcome copy goes here!
+        # Outcome copy goes here!
         print(f'You lose one health point! You have {health_points}.')
         print('\nChoose another door?')
     elif roll == 5:
-# Outcome copy goes here!
+        # Outcome copy goes here!
         print(f'Your health points remain the same. You have {health_points}.')
         print('\nChoose another door?')
     elif roll == 6:
-# Outcome copy goes here!
+        # Outcome copy goes here!
         health_points = health_points + 1
         print(f'You gain one health point! You have {health_points}.')
         print('\nChoose another door?')
