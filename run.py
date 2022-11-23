@@ -22,9 +22,9 @@ def short_string(string):
     and makes sure the string is lowercase
     as part of defensive design.
     """
-    nonblank_string = string + 'x'
+    nonblank_string = string + 'X'
     shortened_string = nonblank_string[0]
-    good_string = shortened_string.lower()
+    good_string = shortened_string.upper()
     return good_string
 
 
@@ -44,31 +44,33 @@ def continue_game(next_function):
     to advance to the next activity.
     """
     global attempts
-    user_input = input('Y/N/E E for exit.\n')
+    user_input = input('Y/N/Q Q for quit.\n')
     play = short_string(user_input)
-    if play == 'y':
+    if play == 'Y':
         attempts = 0
         clear_screen()
         if next_function == 'rules':
             game_rules()
         elif next_function == 'first':
             first_render()
+        elif next_function == 'door':
+            get_door()
         elif next_function == 'oppo':
             oppo_or_not()
         elif next_function == 'dice':
             dice_roll()
         else:
             error_end()
-    elif play == 'n':
+    elif play == 'N':
         clear_screen()
         game_quit()
-    elif play == 'e':
+    elif play == 'Q':
         clear_screen()
         game_quit()
     else:
         attempts = attempts + 1
         if attempts < 5:
-            print('Input must be Y or N or E.')
+            print('Input must be Y or N or Q.')
             continue_game(next_function)
         elif attempts == 5:
             print('Too many attempts.')
@@ -81,9 +83,48 @@ def board_render():
     """
     Renders game board
     """
-    print(f'HP: {health_points}   Turn: {turn}')
+    print(f'HP: {health_points}      Turn: {turn}')
     for row in board:
         print(f'Row {row}: {board[row]}')
+
+
+def door_row():
+    """
+    Gets row assignment for door selection
+    """
+    rows = ['A', 'B', 'C', 'D', 'E']
+    user_row = input('Input row. Q for Quit.\n')
+    row_string = short_string(user_row)
+    if row_string in rows:
+        return row_string
+    elif row_string == 'Q':
+        game_quit()
+    else:
+        print('Pick a valid row or Q for quit')
+        door_row()
+
+
+def door_pos():
+    """
+    Gets position assignment for door selection
+    """
+    user_pos = input('Input position. Q for Quit.\n')
+    if user_pos.isdigit():
+        pos_num = int(user_pos)
+        if 1 <= pos_num <= 5:
+            return pos_num
+        else:
+            print('Enter valid position or Q for Quit.')
+            door_pos()
+    elif user_pos.isalpha():
+        if short_string(user_pos) == 'Q':
+            game_quit()
+        else:
+            print('Enter valid position or Q for Quit.')
+            door_pos()
+    else:
+        print('Enter valid position or Q for Quit.')
+        door_pos()
 
 
 def error_end():
@@ -91,6 +132,7 @@ def error_end():
     Ends game due to an error.
     """
     print('\nThere was an unrecoverable error.')
+
     game_quit()
 
 
@@ -99,6 +141,7 @@ def game_quit():
     Ends game when user selects to quit.
     """
     print('\nThank you, goodbye!\n')
+    exit()
 
 
 def game_over_lose():
@@ -106,6 +149,7 @@ def game_over_lose():
     Ends game when user loses game.
     """
     print("You didn't make it, better luck next time.")
+    exit()
 
 
 # Game play functions ---------------------------------------------------
@@ -167,6 +211,21 @@ def first_render():
     print('Behind the door, you may find an opponent,')
     print('and empty room, or sweet escape.')
     print('\nWould you like to choose a door?')
+
+    continue_game('door')
+
+
+def get_door():
+    """
+    User selects door to open
+    """
+    board_render()
+    print('Select a door.')
+    d_r = door_row()
+    d_p = door_pos()
+    door = [d_r, d_p]
+    print(door)
+
     continue_game('oppo')
 
 
