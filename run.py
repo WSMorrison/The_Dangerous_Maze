@@ -10,6 +10,8 @@ import random
 # Global variables -----------------------------------------------------
 health_points = 0
 attempts = 0
+turn = 0
+board = {}
 
 
 # Basic functions ------------------------------------------------------
@@ -53,8 +55,6 @@ def continue_game(next_function):
             first_render()
         elif next_function == 'oppo':
             oppo_or_not()
-        elif next_function == 'reren':
-            re_render()
         elif next_function == 'dice':
             dice_roll()
         else:
@@ -75,6 +75,15 @@ def continue_game(next_function):
             game_quit()
         else:
             error_end()
+
+
+def board_render():
+    """
+    Renders game board
+    """
+    print(f'HP: {health_points}   Turn: {turn}')
+    for row in board:
+        print(f'Row {row}: {board[row]}')
 
 
 def error_end():
@@ -149,15 +158,16 @@ def first_render():
     """
     global health_points
     health_points = 5
-    board = {'A': [1, 2, 3, 4, 5], 'B': [1, 2, 3, 4, 5], 'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
-    print(f'Column: {board.keys()}')
-    for row in board:
-        print(f'Row {row}: {board[row]}')
-# Skipping ahead for funtion testing.
-# Will need to advance to selecting a door from here.
-    print('SYSTEM: Skipping to opponent selector.\n')
-
-    oppo_or_not()
+    global turn
+    turn = 1
+    global board
+    board = {'A': [1, 2, 3, 4, 5], 'B': [1, 2, 3, 4, 5],
+                'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
+    board_render()
+    print('Behind the door, you may find an opponent,')
+    print('and empty room, or sweet escape.')
+    print('\nWould you like to choose a door?')
+    continue_game('oppo')
 
 
 def oppo_or_not():
@@ -165,7 +175,8 @@ def oppo_or_not():
     Decides if there is an opponent behind the door,
     or if door is clear.
     """
-    global attempts
+    global turn
+    board_render()
     roll = random.randint(1, 6)
     if roll < 6:
 # Opponent copy goes here!
@@ -175,6 +186,7 @@ def oppo_or_not():
     elif roll == 6:
         print('Room is clear! Take a breath and get back out there.')
         print('\nChoose another door?')
+        turn = turn + 1
         continue_game('oppo')
     else:
         attempts = attempts + 1
@@ -194,6 +206,9 @@ def dice_roll():
     """
     global health_points
     global attempts
+    global turn
+    board_render()
+    turn = turn + 1
     roll = random.randint(1, 6)
     print(f'You rolled a {roll}.')
     if roll < 5:
@@ -230,17 +245,12 @@ def did_you_die_though():
     """
     global health_points
     if health_points > 0:
-        continue_game('reren')
+        continue_game('oppo')
     elif health_points == 0:
         game_over_lose()
     else:
         print('Fatal error')
         game_quit()
-
-
-def re_render():
-    print('Rerender happens here!')
-    oppo_or_not()
 
 
 # First call ------------------------------------------------
