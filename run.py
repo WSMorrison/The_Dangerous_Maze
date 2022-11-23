@@ -266,8 +266,8 @@ def get_door():
     user_door = [row, pos]
     if user_door in guessed_doors:
         print(f'You have already tried {user_door}.')
-        print('Give it another try.')
-        get_door()
+        print('Give it another try?')
+        continue_game('door')
     else:
         guessed_doors.append(user_door)
         clear_screen()
