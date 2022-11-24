@@ -125,10 +125,12 @@ def start_game():
     """
     clear_screen()
     print('Welcome to Christmas Vacation.\n')
-    print('Your entire family has been in your house for a month,')
-    print('and you just want to get out to the garage to relax.')
-    print('Can you get some valuable alone time')
-    print('before having a meltdown?')
+    print('Intro')
+    print('Intro')
+    print('Intro')
+    print('Intro')
+    print('Intro')
+    print('Intro')
     print('\nPlay the game?')
 
     continue_game('rules')
@@ -138,26 +140,25 @@ def game_rules():
     """
     Explains game rules, gets user name, and begins gameplay.
     """
-    print('You are in your house.')
-    print('There are Christmas decorations everywhere,')
-    print('and you are disoriented by the blinking, colored lights')
-    print('and the strong smells from the scented candles.\n')
-    print('All the doors in the house are closed,')
-    print('and like this is a bad dream,')
-    print('they all look the same.')
-    print('Try a door, and see if it leads to the garage.\n')
-    print('Behind the door, you may find freedom...')
-    print('...or you may find a needy family member.\n')
-    print('...loading...')
+    print('Intro\n')
+    print('Intro')
+    print('Intro')
+    print('Intro')
+    print('Intro')
+    print('Intro')
+    print('Intro')
+    print('\n...loading...')
 # DONT FORGET TO CHANGE THE SLEEP TO 10 FOR 10 SECONDS!!!!!!!!
     sleep(1)
     clear_screen()
     print('You will get to roll a D6\n')
     print('1-4, you lose a health point!')
     print('5, you escape unscathed,')
-    print('and if you roll a 6, family love and the holiday spirit')
-    print('will restore you one health point.\n')
-    print('Are you ready to go out into the house?')
+    print('and if you roll a 6,')
+    print('one health point will be restored.')
+    print('Rules')
+    print('Rules')
+    print('\nAre you ready to go out into the house?')
 
     continue_game('first')
 
@@ -179,7 +180,7 @@ def first_render():
                 'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
     board_render()
     print('Behind the door, you may find an opponent,')
-    print('and empty room, or sweet escape.')
+    print('and empty room, or the exit.')
     print('\nWould you like to choose a door?')
 
     continue_game('door')
@@ -197,6 +198,7 @@ def door_row():
     if row_string in rows:
         selected_row = row_string
     elif row_string == 'Q':
+        clear_screen()
         game_quit()
     else:
         attempts = attempts + 1
@@ -204,6 +206,7 @@ def door_row():
             print('Pick a valid row, or Q for quit.')
             door_row()
         elif attempts == 5:
+            clear_screen()
             print('Too many attempts.')
             game_quit()
         else:
@@ -226,6 +229,7 @@ def door_pos():
             door_pos()
     elif user_pos.isalpha():
         if short_string(user_pos) == 'Q':
+            clear_screen()
             game_quit()
         else:
             attempts = attempts + 1
@@ -233,6 +237,7 @@ def door_pos():
                 print('Enter valid position or Q for Quit.')
                 door_pos()
             elif attempts == 5:
+                clear_screen()
                 print('Too many attempts.')
                 game_quit()
             else:
@@ -243,6 +248,7 @@ def door_pos():
             print('Enter valid position or Q for Quit.')
             door_pos()
         elif attempts == 5:
+            clear_screen()
             print('Too many attempts.')
             game_quit()
         else:
@@ -258,7 +264,8 @@ def get_door():
     global selected_pos
     global guessed_doors
     board_render()
-    print('Select a door.')
+    print("You're back in the hall.")
+    print('\nSelect a door.')
     door_row()
     door_pos()
     row = selected_row
@@ -288,9 +295,9 @@ def check_door():
     sleep(5)
     if user_door == exit_door:
         clear_screen()
-        print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
-        print('You win you win you fucking legend!')
-        print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
+        print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
+        print("You win! You win! You legend!")
+        print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
         game_quit()
     else:
         clear_screen()
@@ -307,7 +314,7 @@ def oppo_or_not():
     global attempts
     global user_door
     board_render()
-    print(f'You chose {user_door}')
+    print(f'You chose {user_door}.')
     roll = random.randint(1, 6)
     if roll < 6:
         # Opponent copy goes here!
@@ -315,7 +322,7 @@ def oppo_or_not():
         print('\nReady to battle?')
         continue_game('dice')
     elif roll == 6:
-        print('Room is clear! Take a breath and get back out there.')
+        print('Room is empty! Get back out there.')
         print('\nChoose another door?')
         turn = turn + 1
         continue_game('door')
@@ -338,22 +345,25 @@ def dice_roll():
     global health_points
     global attempts
     global turn
-    board_render()
-    turn = turn + 1
     roll = random.randint(1, 6)
-    print(f'You rolled a {roll}.')
     if roll < 5:
         health_points = health_points - 1
+        board_render()
+        print(f'You rolled a {roll}.')
         # Outcome copy goes here!
         print(f'You lose one health point! You have {health_points}.')
         print('\nChoose another door?')
     elif roll == 5:
+        board_render()
+        print(f'You rolled a {roll}.')
         # Outcome copy goes here!
         print(f'Your health points remain the same. You have {health_points}.')
         print('\nChoose another door?')
     elif roll == 6:
-        # Outcome copy goes here!
         health_points = health_points + 1
+        board_render()
+        print(f'You rolled a {roll}.')
+        # Outcome copy goes here!
         print(f'You gain one health point! You have {health_points}.')
         print('\nChoose another door?')
     else:
@@ -366,7 +376,8 @@ def dice_roll():
             game_quit()
         else:
             error_end()
-
+    turn = turn + 1
+            
     did_you_die_though()
 
 
