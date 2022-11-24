@@ -1,6 +1,6 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+"""
+Christmas Vacation game, Python Essentials Portfolio Project, PP3.
+"""
 from os import system, name
 from time import sleep
 # Sleep(x) x is number of seconds.
@@ -148,7 +148,7 @@ def game_rules():
     print('or you may find an oppenent behind it!\n')
     print('If you find an opponent...')
     print('\n...loading...')
-# Change this sleep to shorter times for diagnostics.
+    # Change this sleep to shorter times for diagnostics.
     sleep(15)
     clear_screen()
     print('If you find an opponent,')
@@ -301,13 +301,13 @@ def check_door():
     global user_door
     global exit_door
     global guessed_doors
-    # Diagnostic code, remove before deployment.
+    # Begin diagnostic code, remove before deployment.
     print('Diagnostics:\n')
     print(f'User door: {user_door}')
     print(f'Exit door: {exit_door}')
     print(f'Guessed: {guessed_doors}')
     sleep(1)
-    # End diagnostic code.
+    # End diagnostic code, remove before deployment.
     indicate_door()
 
     if user_door == exit_door:
@@ -394,7 +394,7 @@ def dice_roll():
         else:
             error_end()
     turn = turn + 1
-            
+
     did_you_die_though()
 
 
