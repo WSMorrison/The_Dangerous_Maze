@@ -177,7 +177,7 @@ def first_render():
     exit_pos = random.randint(1, 5)
     exit_door = [exit_row, exit_pos]
     board = {'A': [1, 2, 3, 4, 5], 'B': [1, 2, 3, 4, 5],
-                'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
+             'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
     board_render()
     print('Behind the door, you may find an opponent,')
     print('and empty room, or the exit.')
@@ -282,6 +282,18 @@ def get_door():
     check_door()
 
 
+def indicate_door():
+    """
+    Changes gameboard to reflect user's selection.
+    """
+    old_row = (board.get(selected_row))
+    print(old_row)
+    new_row = old_row
+    new_row[selected_pos - 1] = 0
+    print(new_row)
+    board[selected_row] = new_row
+
+
 def check_door():
     """
     Checks if user guessed the exit door.
@@ -289,10 +301,15 @@ def check_door():
     global user_door
     global exit_door
     global guessed_doors
+    # Diagnostic code, remove before deployment.
+    print('Diagnostics:\n')
     print(f'User door: {user_door}')
     print(f'Exit door: {exit_door}')
     print(f'Guessed: {guessed_doors}')
-    sleep(5)
+    sleep(1)
+    # End diagnostic code.
+    indicate_door()
+
     if user_door == exit_door:
         clear_screen()
         print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
