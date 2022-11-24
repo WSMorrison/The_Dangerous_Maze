@@ -124,13 +124,13 @@ def start_game():
     Introduces game and passes user to begin_game function.
     """
     clear_screen()
-    print('Welcome to Christmas Vacation.\n')
-    print('Intro')
-    print('Intro')
-    print('Intro')
-    print('Intro')
-    print('Intro')
-    print('Intro')
+    print('\n')
+    print('')
+    print('')
+    print('Welcome to Christmas Vacation')
+    print('')
+    print('')
+    print('')
     print('\nPlay the game?')
 
     continue_game('rules')
@@ -140,25 +140,25 @@ def game_rules():
     """
     Explains game rules, gets user name, and begins gameplay.
     """
-    print('Intro\n')
-    print('Intro')
-    print('Intro')
-    print('Intro')
-    print('Intro')
-    print('Intro')
-    print('Intro')
+    print('When prompted, select a door')
+    print('by entering coordinates like "A 3"\n')
+    print('You have 5 health points to escape!')
+    print('Opening a door may reveal the escape,')
+    print('the room behind the door may be empty,')
+    print('or you may find an oppenent behind it!\n')
+    print('If you find an opponent...')
     print('\n...loading...')
-# DONT FORGET TO CHANGE THE SLEEP TO 10 FOR 10 SECONDS!!!!!!!!
-    sleep(1)
+# Change this sleep to shorter times for diagnostics.
+    sleep(15)
     clear_screen()
-    print('You will get to roll a D6\n')
-    print('1-4, you lose a health point!')
-    print('5, you escape unscathed,')
-    print('and if you roll a 6,')
+    print('If you find an opponent,')
+    print('you will get to roll a D6.\n')
+    print('Roll a 1-4, you lose a health point!')
+    print('Roll a 5, you escape unscathed,')
+    print('and if you manage to roll a 6,')
     print('one health point will be restored.')
-    print('Rules')
-    print('Rules')
-    print('\nAre you ready to go out into the house?')
+    print('')
+    print('\nAre you ready to play the game?')
 
     continue_game('first')
 
@@ -179,7 +179,7 @@ def first_render():
     board = {'A': [1, 2, 3, 4, 5], 'B': [1, 2, 3, 4, 5],
              'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
     board_render()
-    print('Behind the door, you may find an opponent,')
+    print('Behind these doors is an opponent,')
     print('and empty room, or the exit.')
     print('\nWould you like to choose a door?')
 
@@ -264,7 +264,7 @@ def get_door():
     global selected_pos
     global guessed_doors
     board_render()
-    print("You're back in the hall.")
+    print('You are in the hall.')
     print('\nSelect a door.')
     door_row()
     door_pos()
