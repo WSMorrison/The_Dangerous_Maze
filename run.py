@@ -144,7 +144,7 @@ def game_over_lose():
     """
     Ends game when user loses game.
     """
-    print("You didn't make it, better luck next time.")
+    print('You didn\'t make it, better luck next time.')
     exit()
 
 
@@ -179,7 +179,7 @@ def game_rules():
     print('If you find an opponent...')
     print('\n...loading...')
     # Change this sleep to shorter times for diagnostics.
-    sleep(1)
+    sleep(10)
     clear_screen()
     print('If you find an opponent,')
     print('you will get to roll a D6.\n')
@@ -316,7 +316,7 @@ def check_door():
     if user_door == exit_door:
         clear_screen()
         print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
-        print("You win! You win! You legend!")
+        print('You win! You win! You legend!')
         print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
         game_quit()
     else:
