@@ -305,11 +305,11 @@ def check_door():
     global exit_door
     global guessed_doors
     # Begin diagnostic code, remove before deployment.
-    print('Diagnostics:\n')
-    print(f'User door: {user_door}')
-    print(f'Exit door: {exit_door}')
-    print(f'Guessed: {guessed_doors}')
-    sleep(1)
+    # print('Diagnostics:\n')
+    # print(f'User door: {user_door}')
+    # print(f'Exit door: {exit_door}')
+    # print(f'Guessed: {guessed_doors}')
+    # sleep(1)
     # End diagnostic code, remove before deployment.
     indicate_door()
 
