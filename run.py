@@ -78,10 +78,40 @@ def continue_game(next_function):
             print('Input must be Y or N, or Q for Quit.')
             continue_game(next_function)
         elif attempts == 5:
+            clear_screen()
             print('Too many attempts.')
             game_quit()
         else:
             error_end()
+
+
+def input_attempts(next_function):
+    """
+    Gives the user 5 attempts to give bad input.
+    """
+    global attempts
+    attempts = attempts + 1
+    if attempts < 5:
+        if next_function == 'row':
+            print('Pick a valid row, or Q for quit.')
+            door_row()
+        elif next_function == 'pos':
+            print('Pick a valid postion, or Q for quit.')
+            door_pos()
+        elif next_function == 'oppo':
+            print('Error rolling.')
+            oppo_or_not()
+        elif next_function == 'roll':
+            print('Error rolling')
+            dice_roll()
+        else:
+            error_end()
+    elif attempts == 5:
+        clear_screen()
+        print('Too many attempts.')
+        game_quit()
+    else:
+        error_end()
 
 
 def board_render():
@@ -149,7 +179,7 @@ def game_rules():
     print('If you find an opponent...')
     print('\n...loading...')
     # Change this sleep to shorter times for diagnostics.
-    sleep(15)
+    sleep(1)
     clear_screen()
     print('If you find an opponent,')
     print('you will get to roll a D6.\n')
@@ -201,16 +231,7 @@ def door_row():
         clear_screen()
         game_quit()
     else:
-        attempts = attempts + 1
-        if attempts < 5:
-            print('Pick a valid row, or Q for quit.')
-            door_row()
-        elif attempts == 5:
-            clear_screen()
-            print('Too many attempts.')
-            game_quit()
-        else:
-            error_end()
+        input_attempts('row')
 
 
 def door_pos():
@@ -232,27 +253,9 @@ def door_pos():
             clear_screen()
             game_quit()
         else:
-            attempts = attempts + 1
-            if attempts < 5:
-                print('Enter valid position or Q for Quit.')
-                door_pos()
-            elif attempts == 5:
-                clear_screen()
-                print('Too many attempts.')
-                game_quit()
-            else:
-                error_end()
+            input_attempts('pos')
     else:
-        attempts = attempts + 1
-        if attempts < 5:
-            print('Enter valid position or Q for Quit.')
-            door_pos()
-        elif attempts == 5:
-            clear_screen()
-            print('Too many attempts.')
-            game_quit()
-        else:
-            error_end()
+        input_attempts('pos')
 
 
 def get_door():
@@ -344,15 +347,7 @@ def oppo_or_not():
         turn = turn + 1
         continue_game('door')
     else:
-        attempts = attempts + 1
-        if attempts < 5:
-            print('Error rolling.')
-            oppo_or_not()
-        elif attempts == 5:
-            print('Too many attempts.')
-            game_quit()
-        else:
-            error_end()
+        input_attempts('oppo')
 
 
 def dice_roll():
@@ -384,15 +379,7 @@ def dice_roll():
         print(f'You gain one health point! You have {health_points}.')
         print('\nChoose another door?')
     else:
-        attempts = attempts + 1
-        if attempts < 5:
-            print('Error rolling.')
-            dice_roll()
-        elif attempts == 5:
-            print('Too many attempts.')
-            game_quit()
-        else:
-            error_end()
+        input_attempts('roll')
     turn = turn + 1
 
     did_you_die_though()
