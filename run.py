@@ -1,9 +1,8 @@
 """
-Christmas Vacation game, Python Essentials Portfolio Project, PP3.
+Dangerous Maze game, Python Essentials Portfolio Project, PP3.
 """
 from os import system, name
 from time import sleep
-# Sleep(x) x is number of seconds.
 import random
 import gspread
 from google.oauth2.service_account import Credentials
@@ -19,11 +18,6 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('monsters_master_list')
-"""
-monsters = SHEET.worksheet('opponents')
-opponents = monsters.get_all_values()
-print(opponents)
-"""
 
 
 # Global variables -----------------------------------------------------
@@ -220,7 +214,6 @@ def game_rules():
     print('If you find an opponent...')
     print('\n...loading...')
     get_opponents()
-    # Change this sleep to shorter times for diagnostics.
     sleep(5)
     clear_screen()
     print('If you find an opponent,')
@@ -366,9 +359,9 @@ def check_door():
     # Begin diagnostic code, remove before deployment.
     # print('Diagnostics:\n')
     # print(f'User door: {user_door}')
-    # print(f'Exit door: {exit_door}')
+    print(f'Exit door: {exit_door}')
     # print(f'Guessed: {guessed_doors}')
-    # sleep(1)
+    sleep(2)
     # End diagnostic code, remove before deployment.
     indicate_door()
 
