@@ -169,7 +169,9 @@ def game_over_lose():
     """
     Ends game when user loses game.
     """
-    print('You didn\'t make it, better luck next time.')
+    clear_screen()
+    board_render()
+    print('\nYou didn\'t make it, better luck next time.\n')
     exit()
 
 
@@ -205,7 +207,7 @@ def game_rules():
     print('\n...loading...')
     get_opponents()
     # Change this sleep to shorter times for diagnostics.
-    sleep(10)
+    sleep(5)
     clear_screen()
     print('If you find an opponent,')
     print('you will get to roll a D6.\n')
