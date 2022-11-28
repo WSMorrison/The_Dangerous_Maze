@@ -24,18 +24,18 @@ SHEET = GSPREAD_CLIENT.open('monsters_master_list')
 health_points = 0
 attempts = 0
 turn = 0
-selected_row = ''
 selected_pos = 0
 calc_oppo = 0
+selected_row = ''
 user_door = []
 exit_door = []
-board = {}
 guessed_doors = []
 opponents_list = []
 minus_one_list = []
 no_change_list = []
 plus_one_list = []
 opponents_past = []
+board = {}
 
 
 # Basic functions ------------------------------------------------------
