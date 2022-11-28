@@ -171,7 +171,7 @@ def game_over_win():
     """
     clear_screen()
     board_render()
-    print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
+    print('\n*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
     print('You win! You escape the maze!')
     print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
     exit()
@@ -183,7 +183,7 @@ def game_over_lose():
     """
     clear_screen()
     board_render()
-    print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
+    print('\n*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
     print('You lose! You did not escape!')
     print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
     exit()
