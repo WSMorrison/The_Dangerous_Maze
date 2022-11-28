@@ -326,7 +326,7 @@ def get_door():
     global guessed_doors
     board_render()
     print()
-    print('You are in the hall.')
+    print('You are in the maze.')
     print('\nSelect a door.')
     door_row()
     door_pos()
