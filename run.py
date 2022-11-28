@@ -182,7 +182,7 @@ def start_game():
     print('\n')
     print('')
     print('')
-    print('Welcome to Christmas Vacation')
+    print('Welcome to the Dangerous Maze!')
     print('')
     print('')
     print('')
@@ -357,7 +357,7 @@ def check_door():
     if user_door == exit_door:
         clear_screen()
         print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
-        print('You win! You win! You legend!')
+        print('You win! You escape the maze!')
         print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
         game_quit()
     else:
