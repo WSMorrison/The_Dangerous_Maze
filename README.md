@@ -2,6 +2,8 @@ clearing screen and timing information from: https://www.geeksforgeeks.org/clear
 
 generating a random letter a-e was inspired by: https://stackoverflow.com/questions/2823316/generate-a-random-letter-in-python but required more research into making it work properly.
 
+code to import Googles sheets is used and implemented as shown and explained in Code Institute lessons, specifically the "Love Sandwiches Walkthrough Project, Getting Set Up, Connecting to our API with Python lesson."
+
 Bugs
 Bug caused the game_over_lose() function to print "You lose" once for every time the dice_roll() function was called. Troubleshooting found I used an if statement instead of an elif statement for the losing condition, which apparently holds all of the print() commands until it's finally called. Replaced with an elif, problem solved.
 
