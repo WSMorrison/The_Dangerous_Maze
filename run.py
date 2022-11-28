@@ -137,6 +137,7 @@ def board_render():
     """
     Renders game board
     """
+    print()
     print(f'HP: {health_points}         Turn: {turn}')
     for row in board:
         print(f'Row {row}: {board[row]}')
@@ -205,6 +206,7 @@ def game_rules():
     """
     Explains game rules, gets user name, and begins gameplay.
     """
+    print()
     print('When prompted, select a door')
     print('by entering coordinates like "A 3"\n')
     print('You have 5 health points to escape!')
@@ -216,13 +218,13 @@ def game_rules():
     get_opponents()
     sleep(5)
     clear_screen()
+    print()
     print('If you find an opponent,')
     print('you will get to roll a D6.\n')
     print('Roll a 1-4, you lose a health point!')
     print('Roll a 5, you escape unscathed,')
     print('and if you manage to roll a 6,')
     print('one health point will be restored.')
-    print('')
     print('\nAre you ready to play the game?')
 
     continue_game('first')
