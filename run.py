@@ -266,6 +266,7 @@ def first_render():
     board = {'A': [1, 2, 3, 4, 5], 'B': [1, 2, 3, 4, 5],
              'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
     board_render()
+    print()
     print('Behind these doors is an opponent,')
     print('and empty room, or the exit.')
     print('\nWould you like to choose a door?')
@@ -324,6 +325,7 @@ def get_door():
     global selected_pos
     global guessed_doors
     board_render()
+    print()
     print('You are in the hall.')
     print('\nSelect a door.')
     door_row()
@@ -400,6 +402,7 @@ def oppo_or_not():
     global attempts
     global user_door
     board_render()
+    print()
     print(f'You chose {user_door}.')
     roll = random.randint(1, 6)
     if roll < 6:
@@ -428,22 +431,25 @@ def dice_roll():
     if roll < 5:
         health_points = health_points - 1
         board_render()
+        print()
         print(f'You rolled a {roll}.')
         print(minus_one_list[calc_oppo])
-        print(f'You lose one health point! You have {health_points}.')
+        print(f'You lose one health point! You now have {health_points}.')
         print('\nChoose another door?')
     elif roll == 5:
         board_render()
+        print()
         print(f'You rolled a {roll}.')
         print(no_change_list[calc_oppo])
-        print(f'Your health points remain the same. You have {health_points}.')
+        print(f'Your health points remain the same. You still have {health_points}.')
         print('\nChoose another door?')
     elif roll == 6:
         health_points = health_points + 1
         board_render()
+        print()
         print(f'You rolled a {roll}.')
         print(plus_one_list[calc_oppo])
-        print(f'You gain one health point! You have {health_points}.')
+        print(f'You gain one health point! You now have {health_points}.')
         print('\nChoose another door?')
     else:
         input_attempts('roll')

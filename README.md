@@ -11,3 +11,5 @@ A bug in door_row() and door_pos() cause the function to return None when user g
 
 Unfixed bugs
 There is a bug where the global attempts variable resets between most functions, but not between the door_row() and door_pos() functions. 
+
+When pulling strings from Google Sheets and trying to display them in an f string literal, the string is surrounted by square brackets and single quotes instead of being seamlessly integrated.
