@@ -165,13 +165,27 @@ def game_quit():
     exit()
 
 
+def game_over_win():
+    """
+    Ends game when user wins game.
+    """
+    clear_screen()
+    board_render()
+    print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
+    print('You win! You escape the maze!')
+    print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
+    exit()
+
+
 def game_over_lose():
     """
     Ends game when user loses game.
     """
     clear_screen()
     board_render()
-    print('\nYou didn\'t make it, better luck next time.\n')
+    print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
+    print('You lose! You did not escape!')
+    print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
     exit()
 
 
@@ -357,14 +371,9 @@ def check_door():
     indicate_door()
 
     if user_door == exit_door:
-        clear_screen()
-        print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
-        print('You win! You escape the maze!')
-        print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
-        game_quit()
+        game_over_win()
     else:
         clear_screen()
-
         oppo_or_not()
 
 
