@@ -32,10 +32,16 @@ attempts = 0
 turn = 0
 selected_row = ''
 selected_pos = 0
+calc_oppo = 0
 user_door = []
 exit_door = []
 board = {}
 guessed_doors = []
+opponents_list = []
+minus_one_list = []
+no_change_list = []
+plus_one_list = []
+opponents_past = []
 
 
 # Basic functions ------------------------------------------------------
@@ -197,6 +203,7 @@ def game_rules():
     print('or you may find an oppenent behind it!\n')
     print('If you find an opponent...')
     print('\n...loading...')
+    get_opponents()
     # Change this sleep to shorter times for diagnostics.
     sleep(10)
     clear_screen()
@@ -210,6 +217,21 @@ def game_rules():
     print('\nAre you ready to play the game?')
 
     continue_game('first')
+
+
+def get_opponents():
+    """
+    Get the copy for opponents and outcomes from
+    Google Sheets hosted spreadsheet.
+    """
+    global opponents_list
+    global minus_one_list
+    global no_change_list
+    global plus_one_list
+    opponents_list = SHEET.worksheet('opponents').get_all_values()
+    minus_one_list = SHEET.worksheet('minus_one').get_all_values()
+    no_change_list = SHEET.worksheet('no_change').get_all_values()
+    plus_one_list = SHEET.worksheet('plus_one').get_all_values()
 
 
 def first_render():
@@ -344,6 +366,20 @@ def check_door():
         oppo_or_not()
 
 
+def which_opponent():
+    """
+    Decides which opponent copy to select from
+    spreadsheet, while ensuring no duplicates.
+    """
+    global opponents_past
+    global calc_oppo
+    calc_oppo = random.randint(0, 24)
+    if calc_oppo in opponents_past:
+        which_opponent()
+    else:
+        opponents_past.append(calc_oppo)
+
+
 def oppo_or_not():
     """
     Decides if there is an opponent behind the door,
@@ -356,8 +392,9 @@ def oppo_or_not():
     print(f'You chose {user_door}.')
     roll = random.randint(1, 6)
     if roll < 6:
-        # Opponent copy goes here!
+        which_opponent()
         print('There is an opponent!')
+        print(f'You have encountered {opponents_list[calc_oppo]}')
         print('\nReady to battle?')
         continue_game('dice')
     elif roll == 6:
@@ -381,20 +418,20 @@ def dice_roll():
         health_points = health_points - 1
         board_render()
         print(f'You rolled a {roll}.')
-        # Outcome copy goes here!
+        print(minus_one_list[calc_oppo])
         print(f'You lose one health point! You have {health_points}.')
         print('\nChoose another door?')
     elif roll == 5:
         board_render()
         print(f'You rolled a {roll}.')
-        # Outcome copy goes here!
+        print(no_change_list[calc_oppo])
         print(f'Your health points remain the same. You have {health_points}.')
         print('\nChoose another door?')
     elif roll == 6:
         health_points = health_points + 1
         board_render()
         print(f'You rolled a {roll}.')
-        # Outcome copy goes here!
+        print(plus_one_list[calc_oppo])
         print(f'You gain one health point! You have {health_points}.')
         print('\nChoose another door?')
     else:
