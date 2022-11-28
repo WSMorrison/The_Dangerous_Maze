@@ -52,6 +52,14 @@ def short_string(string):
     return good_string
 
 
+def string_debracketer(string):
+    """
+    Removes brackets from inported strings.
+    """
+    no_brackets = ', '.join(string)
+    return no_brackets
+
+
 def clear_screen():
     """
     Clears the screen, often used between rendering text.
@@ -402,8 +410,10 @@ def oppo_or_not():
     roll = random.randint(1, 6)
     if roll < 6:
         which_opponent()
+        calc_string = opponents_list[calc_oppo]
+        literal_string = string_debracketer(calc_string)
         print('There is an opponent!')
-        print(f'You have encountered {opponents_list[calc_oppo]}')
+        print(f'You have encountered {literal_string}')
         print('\nReady to battle?')
         continue_game('dice')
     elif roll == 6:
@@ -428,22 +438,28 @@ def dice_roll():
         board_render()
         print()
         print(f'You rolled a {roll}.')
-        print(minus_one_list[calc_oppo])
+        calc_string = minus_one_list[calc_oppo]
+        outcome_string = string_debracketer(calc_string)
+        print(outcome_string)
         print(f'You lose one health point! You now have {health_points}.')
         print('\nChoose another door?')
     elif roll == 5:
         board_render()
         print()
         print(f'You rolled a {roll}.')
-        print(no_change_list[calc_oppo])
-        print(f'Your health points remain the same. You still have {health_points}.')
+        calc_string = no_change_list[calc_oppo]
+        outcome_string = string_debracketer(calc_string)
+        print(outcome_string)
+        print(f'Your health points remain the same. You have {health_points}.')
         print('\nChoose another door?')
     elif roll == 6:
         health_points = health_points + 1
         board_render()
         print()
         print(f'You rolled a {roll}.')
-        print(plus_one_list[calc_oppo])
+        calc_string = plus_one_list[calc_oppo]
+        outcome_string = string_debracketer(calc_string)
+        print(outcome_string)
         print(f'You gain one health point! You now have {health_points}.')
         print('\nChoose another door?')
     else:
