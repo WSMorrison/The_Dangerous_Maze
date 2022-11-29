@@ -70,6 +70,18 @@ def clear_screen():
         _ = system('clear')
 
 
+def diagnostic_prints():
+    """
+    Code that allows the user to see the doors selected
+    as well as the winning door for code testing use.
+    """
+    print('Diagnostics:\n')
+    print(f'User door: {user_door}')
+    print(f'Exit door: {exit_door}')
+    print(f'Guessed: {guessed_doors}')
+    sleep(5)
+
+
 def continue_game(next_function):
     """
     Y/N/E input asking user if user wants
@@ -215,8 +227,8 @@ def game_rules():
     Explains game rules, gets user name, and begins gameplay.
     """
     print()
-    print('When prompted, select a door')
-    print('by entering coordinates like "A 3"\n')
+    print('When prompted, select a door by')
+    print('entering coordinates like "A 3"\n')
     print('You have 5 health points to escape!')
     print('Opening a door may reveal the escape,')
     print('the room behind the door may be empty,')
@@ -353,15 +365,9 @@ def check_door():
     Checks if user guessed the exit door.
     """
     global user_door, exit_door, guessed_doors
-    # Begin diagnostic code, remove before deployment.
-    print('Diagnostics:\n')
-    # print(f'User door: {user_door}')
-    print(f'Exit door: {exit_door}')
-    # print(f'Guessed: {guessed_doors}')
-    sleep(2)
-    # End diagnostic code, remove before deployment.
+    # Following function is diagnostic only.
+    # diagnostic_prints()
     indicate_door()
-
     if user_door == exit_door:
         game_over_win()
     else:

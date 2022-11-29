@@ -55,5 +55,61 @@ When the code was deployment ready, it was deployed in Heroku by following these
 
 -The run.py file had to have the input() methods modified with a linebreak to work with the Code Institute mock terminal being run by Heroku.
 -A requirements.txt file was made to give Heroku the dependencies required by the program. This was done by issuing the command "pip3 freeze > requirements.txt" in the Gitpod terminal.
--
+-In the Heroku dashboard, a new app was created.
+-In the new app's page, the settings tab was selected, and the following settings were set:
+    -A config var was set as CREDS for the key field, and the creds.json file contents copied and pasted into the value field.
+    -A config var was set as PORT for the key field, and 8000 for the value field.
+    -heroku/python Buildpack was added to the required buildpacks.
+    -heroku/nodejs Buildpack was added to the required buildpacks. The buildpacks must be set in this order.
+-In the deploy tab of the app's page, the following selections were made:
+    -The app was connected to the developer's appropriate Github repository.
+    -Automatic deploys were enabled.
+    -Deploy Branch was selected for the initial deploy.
+-When Heroku successfully deployed the App, the deployment was checked and tested.
+
+# Features
+
+-The game displays a game board showing rows of doors and selectable positions on each row.
+-The game changes positions to a 0 instead of a position number to indicate that it was selected.
+-The code defends against selecting a previously selected door to avoid wasted attempts or errors.
+-The code defends against bad, empty, or duplicate inputs during gameplay.
+-The game accesses a developer expandable list of opponents for the color copy during gameplay.
+-The code tracks which opponents have been called and excludes them from duplicate selection.
+-Health points are displayed throughout gameplay and remain accurate as gameplay advances.
+-A turn counter maintains a count of user turns and indicates how long they have lasted.
+-The code clears the screen and rebuilds the game board at each input to maintain a clean look.
+
+# Testing
+
+The game was tested in Gitpod during development, to maintain continuity of functionality and to check that each added development worked properly. 
+
+There is a diagnostic function intentially left in the code, the call for it commented out, that allows the developer and subsequent developers to view the user selected door position, the winning door position, and all previously selected positions in order to allow a developer to see what's going on and quickly test changes in or avoid game winning code. This code is intentionally left in, because it may be useful for assessors as well!
+
+After deployment, the app was shared with friends, family, and Code Institute classmates to test the code.
+
+Some bugs were exposed during initial development and during deployed testing, most were fixed.
+
+## Bugs
+
+During predeployment development, a bug was found that caused the game_over_lose() function to print a line displaying "You lose" once for every time the dice_roll() function had been called during gameplay. Troubleshooting found that developer had used an if statment instead of an elif statement for the losing condition, which apparently heald all of the instances of the game_over_lose() function until it was finally called. Replaced the erroneous if statement with an elif statement, and the code worked properly, only printing the losing message once. (Some of these functions have been refactored or changed, so this may not seem directly applicable to code as it's written now, but the logic and the error would have remained.)
+
+A bug in the initial design of the door_row() and door_pos() functions was revealed in predevelopment testing. When the user gave a bad input on the first attempt at the row or position, the functions would return None even if the user ultimately submitted a good input. The problem was that the defensive part of the function called itself again, so the value returned did not get to the original calling location. The issue was fixed by passing around a global variable instead of passing the function's returned output directly to the position it was called. This allowed the function to write the user's good input to the variable and that information be accessed elsewhere in the program.
+
+Before the code was deployed, the Python code was linked to Google Sheets spreadsheets for the color copy. During the initial build of this functionality, the code was accessed and returned directly into an f'string literal. This caused the string returned with square brackets and single quotes surrounding (see screenshot) instead of a seamless string. Classmate [Adam Boczek](https://github.com/aboczek) suggested a solution described by Borislav Hadzhiev on his [webpage](https://bobbyhadz.com/blog/python-remove-square-brackets-from-list). A new string_debracketer() function was developed using similar code, and printing the returned string to the f'string literal displayed the text properly.
+
+## Unfixed bugs
+
+There is a bug where the global attempts variable resets between most functions, but not between the door_row() and door_pos() functions. This means that the user has a combined 5 attempts to input good values for the door row and the door position.
+
+# Credits
+
+-Code Institute Python Essentials lessons for the bulk of my understanding of how Python works. [Code Institute](https://codeinstitute.net/ie/)
+-Code Institute instructor Simen Daehlin for almost everything else. [Simen Daehlin Github](https://github.com/Eventyret)
+-Code Institute mentor Jubrile Akolade provided guidance on where to focus time building project and an almost infinite amount of other support.
+-Code to import Googles sheets is used and implemented as shown and explained in Code Institute lessons, specifically the "Love Sandwiches Walkthrough Project, Getting Set Up, Connecting to our API with Python lesson." On request.
+-W3Schools for help with some data structures and methods. [W3Schools](https://www.w3schools.com/python/)
+-Information on clearing the screens on different operating systems found [here.](https://www.geeksforgeeks.org/clear-screen-python/)
+-Information and ideas that inspired using ASCII assigments and the random.randint() method in a specific range to return a random letter was found [here.](https://stackoverflow.com/questions/2823316/generate-a-random-letter-in-python)
+-Information on using the .join() method to creat strings free of brackets and single quotes for use as part of string literals was found [here.](https://bobbyhadz.com/blog/python-remove-square-brackets-from-list)
+
 
