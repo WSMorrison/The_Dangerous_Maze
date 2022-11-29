@@ -103,6 +103,8 @@ def continue_game(next_function):
             oppo_or_not()
         elif next_function == 'dice':
             dice_roll()
+        elif next_function == 'lose':
+            game_over_lose()
         else:
             error_end()
     elif play == 'N':
@@ -366,7 +368,7 @@ def check_door():
     """
     global user_door, exit_door, guessed_doors
     # Following function is diagnostic only.
-    # diagnostic_prints()
+    diagnostic_prints()
     indicate_door()
     if user_door == exit_door:
         game_over_win()
@@ -465,7 +467,7 @@ def did_you_die_though():
     if health_points > 0:
         continue_game('door')
     elif health_points == 0:
-        game_over_lose()
+        continue_game('lose')
     else:
         error_end()
 
