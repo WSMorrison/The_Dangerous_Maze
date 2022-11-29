@@ -210,12 +210,12 @@ def start_game():
     Introduces game and passes user to begin_game function.
     """
     clear_screen()
-    print('\n')
-    print('')
-    print('')
-    print('Welcome to the Dangerous Maze!')
-    print('')
-    print('')
+    print('\nWelcome to...    ___')
+    print(' |The\\   |   \\  /   |')
+    print(' | |\\ \\  | |\\ \\/ /| |')
+    print(' | Dangerous!   Maze!')
+    print(' | |/ /  | |  \\/  | |')
+    print(' |___/   |_|      |_|')
     print('')
     print('\nPlay the game?')
 
