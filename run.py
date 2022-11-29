@@ -243,10 +243,7 @@ def get_opponents():
     Get the copy for opponents and outcomes from
     Google Sheets hosted spreadsheet.
     """
-    global opponents_list
-    global minus_one_list
-    global no_change_list
-    global plus_one_list
+    global opponents_list, minus_one_list, no_change_list, plus_one_list
     opponents_list = SHEET.worksheet('opponents').get_all_values()
     minus_one_list = SHEET.worksheet('minus_one').get_all_values()
     no_change_list = SHEET.worksheet('no_change').get_all_values()
@@ -257,12 +254,9 @@ def first_render():
     """
     Does the initial gameboard render.
     """
-    global health_points
+    global health_points, turn, board, exit_door
     health_points = 5
-    global turn
     turn = 1
-    global board
-    global exit_door
     exit_row = chr(random.randint(65, 69))
     exit_pos = random.randint(1, 5)
     exit_door = [exit_row, exit_pos]
@@ -281,8 +275,7 @@ def door_row():
     """
     Gets row assignment for door selection
     """
-    global attempts
-    global selected_row
+    global attempts, selected_row
     rows = ['A', 'B', 'C', 'D', 'E']
     user_row = input('Input row. Q for Quit.\n')
     row_string = short_string(user_row)
@@ -299,8 +292,7 @@ def door_pos():
     """
     Gets position assignment for door selection
     """
-    global attempts
-    global selected_pos
+    global attempts, selected_pos
     user_pos = input('Input position. Q for Quit.\n')
     if user_pos.isdigit():
         pos_num = int(user_pos)
@@ -323,10 +315,7 @@ def get_door():
     """
     User selects door to open
     """
-    global user_door
-    global selected_row
-    global selected_pos
-    global guessed_doors
+    global user_door, selected_row, selected_pos, guessed_doors
     board_render()
     print()
     print('You are in the maze.')
@@ -363,11 +352,9 @@ def check_door():
     """
     Checks if user guessed the exit door.
     """
-    global user_door
-    global exit_door
-    global guessed_doors
+    global user_door, exit_door, guessed_doors
     # Begin diagnostic code, remove before deployment.
-    # print('Diagnostics:\n')
+    print('Diagnostics:\n')
     # print(f'User door: {user_door}')
     print(f'Exit door: {exit_door}')
     # print(f'Guessed: {guessed_doors}')
@@ -387,8 +374,7 @@ def which_opponent():
     Decides which opponent copy to select from
     spreadsheet, while ensuring no duplicates.
     """
-    global opponents_past
-    global calc_oppo
+    global opponents_past, calc_oppo
     calc_oppo = random.randint(0, 24)
     if calc_oppo in opponents_past:
         which_opponent()
@@ -401,9 +387,7 @@ def oppo_or_not():
     Decides if there is an opponent behind the door,
     or if door is clear.
     """
-    global turn
-    global attempts
-    global user_door
+    global turn, attempts, user_door
     board_render()
     print()
     print(f'You chose {user_door}.')
@@ -429,9 +413,7 @@ def dice_roll():
     """
     Rolls the D6.
     """
-    global health_points
-    global attempts
-    global turn
+    global health_points, attempts, turn
     roll = random.randint(1, 6)
     if roll < 5:
         health_points = health_points - 1
