@@ -368,7 +368,7 @@ def check_door():
     """
     global user_door, exit_door, guessed_doors
     # Following function is diagnostic only.
-    diagnostic_prints()
+    # diagnostic_prints()
     indicate_door()
     if user_door == exit_door:
         game_over_win()
