@@ -17,12 +17,12 @@ The program will exhibit understanding of the Python pogramming language, functi
 
 # User Experience
 
--The game will be able to be played on a computer browser.
--The game will accept user input.
--The game will react to user inputs, rejecting bad or duplicate inputs in a pleaseing way.
--The game will progress in a logical way, and indicate previous guesses.
--The game will be of appropriate difficulty and duration.
--The game will have engaging copy.
+- The game will be able to be played on a computer browser.
+- The game will accept user input.
+- The game will react to user inputs, rejecting bad or duplicate inputs in a pleaseing way.
+- The game will progress in a logical way, and indicate previous guesses.
+- The game will be of appropriate difficulty and duration.
+- The game will have engaging copy.
 
 # Project Outcome
 
@@ -40,44 +40,44 @@ The program is written in the Python programming language. [Python](https://www.
 
 ## Technology
 
-The program was built on the Code Institute Python Essentials Templplate. On request.
-The program uses Google Sheets for spreadsheet hosting. [Google Sheets](https://www.google.com/sheets/about/)
-The spreadsheets are accessed using a credentials API provided by Google Sheets.
-The spreadsheets are interpreted for Python using Gspread. [gspread](https://docs.gspread.org/en/v5.7.0/)
-Python imports modules from the time and math libraries, and the user's operating system.
+- The program was built on the Code Institute Python Essentials Templplate. On request.
+- The program uses Google Sheets for spreadsheet hosting. [Google Sheets](https://www.google.com/sheets/about/)
+- The spreadsheets are accessed using a credentials API provided by Google Sheets.
+- The spreadsheets are interpreted for Python using Gspread. [gspread](https://docs.gspread.org/en/v5.7.0/)
+- Python imports modules from the time and math libraries, and the user's operating system.
 
 ## Deployment
 
-Code was written and version control maintained in GitHub. [Github](https://github.com/)
-The game was deployed as an app using Heroku. [Heroku](https://www.heroku.com/)
+- Code was written and version control maintained in GitHub. [Github](https://github.com/)
+- The game was deployed as an app using Heroku. [Heroku](https://www.heroku.com/)
 
 When the code was deployment ready, it was deployed in Heroku by following these steps as outlined in the Code Institute Love Sandwiches Walkthrough Project, Deployment, Deploying our Project Part 1 and Part 2 lessons:
 
--The run.py file had to have the input() methods modified with a linebreak to work with the Code Institute mock terminal being run by Heroku.
--A requirements.txt file was made to give Heroku the dependencies required by the program. This was done by issuing the command "pip3 freeze > requirements.txt" in the Gitpod terminal.
--In the Heroku dashboard, a new app was created.
--In the new app's page, the settings tab was selected, and the following settings were set:
-    -A config var was set as CREDS for the key field, and the creds.json file contents copied and pasted into the value field.
-    -A config var was set as PORT for the key field, and 8000 for the value field.
-    -heroku/python Buildpack was added to the required buildpacks.
-    -heroku/nodejs Buildpack was added to the required buildpacks. The buildpacks must be set in this order.
--In the deploy tab of the app's page, the following selections were made:
-    -The app was connected to the developer's appropriate Github repository.
-    -Automatic deploys were enabled.
-    -Deploy Branch was selected for the initial deploy.
--When Heroku successfully deployed the App, the deployment was checked and tested.
+- The run.py file had to have the input() methods modified with a linebreak to work with the Code Institute mock terminal being run by Heroku.
+- A requirements.txt file was made to give Heroku the dependencies required by the program. This was done by issuing the command "pip3 freeze > requirements.txt" in the Gitpod terminal.
+- In the Heroku dashboard, a new app was created.
+- In the new app's page, the settings tab was selected, and the following settings were set:
+    - A config var was set as CREDS for the key field, and the creds.json file contents copied and pasted into the value field.
+    - A config var was set as PORT for the key field, and 8000 for the value field.
+    - heroku/python Buildpack was added to the required buildpacks.
+    - heroku/nodejs Buildpack was added to the required buildpacks. The buildpacks must be set in this order.
+- In the deploy tab of the app's page, the following selections were made:
+    - The app was connected to the developer's appropriate Github repository.
+    - Automatic deploys were enabled.
+    - Deploy Branch was selected for the initial deploy.
+- When Heroku successfully deployed the App, the deployment was checked and tested.
 
 # Features
 
--The game displays a game board showing rows of doors and selectable positions on each row.
--The game changes positions to a 0 instead of a position number to indicate that it was selected.
--The code defends against selecting a previously selected door to avoid wasted attempts or errors.
--The code defends against bad, empty, or duplicate inputs during gameplay.
--The game accesses a developer expandable list of opponents for the color copy during gameplay.
--The code tracks which opponents have been called and excludes them from duplicate selection.
--Health points are displayed throughout gameplay and remain accurate as gameplay advances.
--A turn counter maintains a count of user turns and indicates how long they have lasted.
--The code clears the screen and rebuilds the game board at each input to maintain a clean look.
+- The game displays a game board showing rows of doors and selectable positions on each row.
+- The game changes positions to a 0 instead of a position number to indicate that it was selected.
+- The code defends against selecting a previously selected door to avoid wasted attempts or errors.
+- The code defends against bad, empty, or duplicate inputs during gameplay.
+- The game accesses a developer expandable list of opponents for the color copy during gameplay.
+- The code tracks which opponents have been called and excludes them from duplicate selection.
+- Health points are displayed throughout gameplay and remain accurate as gameplay advances.
+- A turn counter maintains a count of user turns and indicates how long they have lasted.
+- The code clears the screen and rebuilds the game board at each input to maintain a clean look.
 
 # Testing
 
@@ -103,13 +103,13 @@ There is a bug where the global attempts variable resets between most functions,
 
 # Credits
 
--Code Institute Python Essentials lessons for the bulk of my understanding of how Python works. [Code Institute](https://codeinstitute.net/ie/)
--Code Institute instructor Simen Daehlin for almost everything else. [Simen Daehlin Github](https://github.com/Eventyret)
--Code Institute mentor Jubrile Akolade provided guidance on where to focus time building project and an almost infinite amount of other support.
--Code to import Googles sheets is used and implemented as shown and explained in Code Institute lessons, specifically the "Love Sandwiches Walkthrough Project, Getting Set Up, Connecting to our API with Python lesson." On request.
--W3Schools for help with some data structures and methods. [W3Schools](https://www.w3schools.com/python/)
--Information on clearing the screens on different operating systems found [here.](https://www.geeksforgeeks.org/clear-screen-python/)
--Information and ideas that inspired using ASCII assigments and the random.randint() method in a specific range to return a random letter was found [here.](https://stackoverflow.com/questions/2823316/generate-a-random-letter-in-python)
--Information on using the .join() method to creat strings free of brackets and single quotes for use as part of string literals was found [here.](https://bobbyhadz.com/blog/python-remove-square-brackets-from-list)
+- Code Institute Python Essentials lessons for the bulk of my understanding of how Python works. [Code Institute](https://codeinstitute.net/ie/)
+- Code Institute instructor Simen Daehlin for almost everything else. [Simen Daehlin Github](https://github.com/Eventyret)
+- Code Institute mentor Jubrile Akolade provided guidance on where to focus time building project and an almost infinite amount of other support.
+- Code to import Googles sheets is used and implemented as shown and explained in Code Institute lessons, specifically the "Love Sandwiches Walkthrough Project, Getting Set Up, Connecting to our API with Python lesson." On request.
+- W3Schools for help with some data structures and methods. [W3Schools](https://www.w3schools.com/python/)
+- Information on clearing the screens on different operating systems found [here.](https://www.geeksforgeeks.org/clear-screen-python/)
+- Information and ideas that inspired using ASCII assigments and the random.randint() method in a specific range to return a random letter was found [here.](https://stackoverflow.com/questions/2823316/generate-a-random-letter-in-python)
+- Information on using the .join() method to creat strings free of brackets and single quotes for use as part of string literals was found [here.](https://bobbyhadz.com/blog/python-remove-square-brackets-from-list)
 
 
