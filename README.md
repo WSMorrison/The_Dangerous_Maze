@@ -97,7 +97,7 @@ A bug in the initial design of the door_row() and door_pos() functions was revea
 
 Before the code was deployed, the Python code was linked to Google Sheets spreadsheets for the color copy. During the initial build of this functionality, the code was accessed and returned directly into an f'string literal. This caused the string returned with square brackets and single quotes surrounding the imported text instead of a seamless string (see screenshot). Classmate [Adam Boczek](https://github.com/aboczek) suggested a solution described by Borislav Hadzhiev on his [webpage](https://bobbyhadz.com/blog/python-remove-square-brackets-from-list). A new string_debracketer() function was developed using similar code, and printing the returned string to the f'string literal displayed the text properly.
 
-![String literal displaying improperly.](../assets/images/string-issue.png)
+![String literal displaying improperly.](./assets/images/string-issue.png)
 
 ## Unfixed bugs
 
