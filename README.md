@@ -1,18 +1,59 @@
-clearing screen and timing information from: https://www.geeksforgeeks.org/clear-screen-python/
+# The Dangerous Maze
 
-generating a random letter a-e was inspired by: https://stackoverflow.com/questions/2823316/generate-a-random-letter-in-python but required more research into making it work properly.
+Porfolio Project 3, Python Essentials.
+<br>
+Screenshot
+<br>
+Table of contents
+<br>
 
-code to import Googles sheets is used and implemented as shown and explained in Code Institute lessons, specifically the "Love Sandwiches Walkthrough Project, Getting Set Up, Connecting to our API with Python lesson."
+# Rationale
 
-code to remove brackets from strings is from: https://bobbyhadz.com/blog/python-remove-square-brackets-from-list
+The Portfolio Project 3 is a terminal based, Python project. It was decided that this format was perfect for a program similar to the text-based, dice-rolling, role-playing games from the developer's childhood before GUI were common. 
 
-Bugs
-Bug caused the game_over_lose() function to print "You lose" once for every time the dice_roll() function was called. Troubleshooting found I used an if statement instead of an elif statement for the losing condition, which apparently holds all of the print() commands until it's finally called. Replaced with an elif, problem solved.
+The purpose of this project is to display the developer's ability to program a Command Line Interface based program. The game will play with simple keyboard based commands, allowing the user to select wether they want to continue or quit, and the user can select positions on a grid that may trigger an opponent or not, and the user will benefit from a simulated dice roll that will decide the outcome of any opponent encounter. The encounters can result in the loss or gain of a health point, and if the user's health points run out before they find the exit they lose.
 
-A bug in door_row() and door_pos() cause the function to return None when user gave a bad input on the first attempt, even if good input was ultimately given. I found that the probelm was that the defensive part of the function called itself again, so the returned value did not get to the original calling location. This issue was fixed by passing around a global variable.
+The program will exhibit understanding of the Python pogramming language, functions, nested functions, data type, nested data types, methods, object oriented programming, API usage, and deployment strategies. It will also incorporate defensive design, well organized code, and easily readable and understandable user interface.
 
-When pulling strings from Google Sheets and trying to display them in an f string literal, the string is surrounted by square brackets and single quotes instead of being seamlessly integrated. Found some code that would remove the brackets and single quotes on https://bobbyhadz.com/blog/python-remove-square-brackets-from-list and adapted it for my use.
+# User Experience
 
-Unfixed bugs
-There is a bug where the global attempts variable resets between most functions, but not between the door_row() and door_pos() functions. 
+-The game will be able to be played on a computer browser.
+-The game will accept user input.
+-The game will react to user inputs, rejecting bad or duplicate inputs in a pleaseing way.
+-The game will progress in a logical way, and indicate previous guesses.
+-The game will be of appropriate difficulty and duration.
+-The game will have engaging copy.
+
+# Project Outcome
+
+The outcome of this project will be a playable, terminal based, command line interface game describing a situation where the user encounters monsters as they try to escape a maze.
+
+# Design
+
+Care was taken to make the game input locations consistent as the game advances. The game uses a function to clear the screen and rebuild the displayed gameboard between user inputs, keeping the terminal tidy and readable. The game was intentionally kept with black text on the black terminal background as an homage to the early games of this type it was inspired by. 
+
+# Technology Implementation
+
+## Language
+
+The program is written in the Python programming language. [Python](https://www.python.org/)
+
+## Technology
+
+The program was built on the Code Institute Python Essentials Templplate. On request.
+The program uses Google Sheets for spreadsheet hosting. [Google Sheets](https://www.google.com/sheets/about/)
+The spreadsheets are accessed using a credentials API provided by Google Sheets.
+The spreadsheets are interpreted for Python using Gspread. [gspread](https://docs.gspread.org/en/v5.7.0/)
+Python imports modules from the time and math libraries, and the user's operating system.
+
+## Deployment
+
+Code was written and version control maintained in GitHub. [Github](https://github.com/)
+The game was deployed as an app using Heroku. [Heroku](https://www.heroku.com/)
+
+When the code was deployment ready, it was deployed in Heroku by following these steps as outlined in the Code Institute Love Sandwiches Walkthrough Project, Deployment, Deploying our Project Part 1 and Part 2 lessons:
+
+-The run.py file had to have the input() methods modified with a linebreak to work with the Code Institute mock terminal being run by Heroku.
+-A requirements.txt file was made to give Heroku the dependencies required by the program. This was done by issuing the command "pip3 freeze > requirements.txt" in the Gitpod terminal.
+-
 
