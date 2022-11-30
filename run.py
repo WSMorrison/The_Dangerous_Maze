@@ -112,6 +112,8 @@ def continue_game(next_function):
             game_over_lose()
         elif next_function == 'scared':
             game_over_lose()
+        elif next_function == 'over':
+            start_game()
         else:
             error_end()
     elif play == 'N':
@@ -127,6 +129,10 @@ def continue_game(next_function):
             stay_in_hall()
         elif next_function == 'scared':
             get_door()
+        elif next_function == 'over':
+            clear_screen()
+            print('\nUntil the next cave, goodbye!')
+            exit()
         else:
             clear_screen()
             game_quit()
@@ -254,7 +260,9 @@ def game_over_win():
     print('\n*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
     print('You win! You escape the maze!')
     print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n')
-    exit()
+    play_again()
+    print('\nPlay again?')
+    continue_game(over)
 
 
 def game_over_lose():
@@ -266,7 +274,8 @@ def game_over_lose():
     print('\n*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
     print('You lose! You did not escape!')
     print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n')
-    exit()
+    print('\nPlay again?')
+    continue_game(over)
 
 
 # Game play functions ---------------------------------------------------
