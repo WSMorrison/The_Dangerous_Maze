@@ -107,11 +107,26 @@ def continue_game(next_function):
             dice_roll()
         elif next_function == 'lose':
             game_over_lose()
+        elif next_function == 'scared':
+            game_over_lose()
         else:
             error_end()
     elif play == 'N':
-        clear_screen()
-        game_quit()
+        if next_function == 'rules':
+            clear_screen()
+            n_quit()
+        elif next_function == 'first':
+            clear_screen()
+            n_quit()
+        elif next_function == 'dice':
+            run_away()
+        elif next_function == 'door':
+            stay_in_hall()
+        elif next_function == 'scared':
+            get_door()
+        else:
+            clear_screen()
+            game_quit()
     elif play == 'Q':
         clear_screen()
         game_quit()
@@ -147,8 +162,10 @@ def input_attempts(next_function):
         elif next_function == 'roll':
             print('Error rolling')
             dice_roll()
+        elif next_function == 'run':
+            run_away()
         else:
-            error_end()
+            stay_in_hall()
     elif attempts == 5:
         clear_screen()
         print('Too many attempts.')
@@ -167,6 +184,42 @@ def board_render():
         print(f'Row {row}: {board[row]}')
 
 
+def give_hint():
+    """
+    Gives user a hint after every third turn.
+    """
+    hint_row = ['A', 'B', 'C', 'D', 'E']
+    hint_pos = [1, 2, 3, 4, 5]
+    hint_row.remove(exit_row)
+    hint_pos.remove(exit_pos)
+    len_row = len(hint_row) - 1
+    len_pos = len(hint_pos) - 1
+    if len_pos > 0:
+        if turn % 2 == 0:
+            hint = hint_row[random.randint(0, (len_row))]
+            print(f'You see an old sign that says "Row {hint} leads to doom!"')
+            hint_row.remove(hint)
+        elif turn % 2 == 1:
+            hint = hint_pos[random.randint(0, (len_pos))]
+            print(f'A carving in the wall reads "Fear position {hint}!"')
+            hint_pos.remove(hint)
+        else:
+            error_end()
+    elif len_pos == 0:
+        print('You see an old sign but the writing is illegible.')
+    else:
+        error_end()
+
+
+def stay_in_hall():
+    clear_screen()
+    board_render()
+    print('\nIf you choose no doors, you have no chance for escape.')
+    print('Your rotting bones will be left for the next sad soul.')
+    print('\nAre you sure?')
+    continue_game('scared')
+
+
 def error_end():
     """
     Ends game due to an error.
@@ -176,11 +229,19 @@ def error_end():
     game_quit()
 
 
+def n_quit():
+    """
+    Ends game after an N selection.
+    """
+    print('\nMaybe you will grow up to be brave.\n')
+    exit()
+
+
 def game_quit():
     """
     Ends game when user selects to quit.
     """
-    print('\nThank you, goodbye!\n')
+    print('\nQuitters never win.\n')
     exit()
 
 
@@ -281,7 +342,7 @@ def first_render():
     board_render()
     print()
     print('Behind these doors is an opponent,')
-    print('and empty room, or the exit.')
+    print('an empty room, or the exit.')
     print('\nWould you like to choose a door?')
 
     continue_game('door')
@@ -327,38 +388,12 @@ def door_pos():
         input_attempts('pos')
 
 
-def give_hint():
-    """
-    Gives user a hint after every third turn.
-    """
-    hint_row = ['A', 'B', 'C', 'D', 'E']
-    hint_pos = [1, 2, 3, 4, 5]
-    hint_row.remove(exit_row)
-    hint_pos.remove(exit_pos)
-    len_row = len(hint_row) - 1
-    len_pos = len(hint_pos) - 1
-    if len_pos > 0:
-        if turn % 2 == 0:
-            hint = hint_row[random.randint(0, (len_row))]
-            print(f'You see an old sign that says "Row {hint} leads to doom!')
-            hint_row.remove(hint)
-        elif turn % 2 == 1:
-            hint = hint_pos[random.randint(0, (len_pos))]
-            print(f'A carving in the wall reads "Fear position {hint}!')
-            hint_pos.remove(hint)
-        else:
-            error_end()
-    elif len_pos == 0:
-        print('You see an old sign but the writing is illegible.')
-    else:
-        error_end()
-
-
 def get_door():
     """
-    User selects door to open
+    User selects door to open.
     """
     global user_door, selected_row, selected_pos, guessed_doors
+    clear_screen()
     board_render()
     print()
     print('You are in the maze.')
@@ -486,6 +521,41 @@ def dice_roll():
         print('\nContinue?')
     else:
         input_attempts('roll')
+    turn = turn + 1
+
+    did_you_die_though()
+
+
+def run_away():
+    """
+    Rolls the dice to see the outcome if the user runs away.
+    """
+    global health_points, turn
+    roll = random.randint(1, 6)
+    if roll > 2:
+        clear_screen()
+        board_render()
+        print('\nYou quickly slam the door and run, hopefully undetected.')
+        print('\nContinue?')
+    elif roll == 2:
+        clear_screen()
+        board_render()
+        health_points = health_points - 1
+        print('\nYou smash your hand in the door. Lose 1 health point.')
+        print(f'You now have {health_points} health points.')
+        print('\nContinue?')
+    elif roll == 1:
+        if health_points == 1:
+            health_points = health_points - 1
+        else:
+            health_points = health_points - 2
+        clear_screen()
+        board_render()
+        print('\nYou slip in a pool of acid. Lose 2 health points.')
+        print(f'You now have {health_points} health points.')
+        print('\nContinue?')
+    else:
+        input_attempts('run')
     turn = turn + 1
 
     did_you_die_though()

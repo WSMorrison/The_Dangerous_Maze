@@ -99,6 +99,7 @@ When the code was deployment ready, it was deployed in Heroku by following these
 ![An example of an opponent encounter, showing examples of all three outcomes.](./assets/images/encounter.png)
 
 - The code tracks which opponents have been called and excludes them from duplicate selection.
+- There is a system of hints that will give the user a hint about which row or position the exit door is not in after each third turn. The function tracks which hints were given so there will be no duplicate hints.
 - The code clears the screen and rebuilds the game board at each input to maintain a clean look.
 
 # Testing
@@ -107,7 +108,7 @@ The game was tested in Gitpod during development, to maintain continuity of func
 
 There is a diagnostic function in the code, the call for it commented out. It allows the developer and subsequent developers to view the user selected door position, the winning door position, and all previously selected positions. With this function enabled, a developer can see what's going on and quickly test changes in the code by accessing or avoiding the winning position. This code is intentionally left in, because it may be useful for assessors as well!
 
-After deployment, the app was shared with friends, family, and Code Institute classmates to test the code.
+After deployment, the app was shared with friends, family, and Code Institute classmates to test the code. The game was remarked to be frustrating more than difficult, so two new functions were added to help the user play the game more efficiently. The first added function was a hint that gives the user a row or position the exit door is not in after every third turn. A second function....
 
 Code was copy and pasted into the [Code Institute Python Linter](https://pep8ci.herokuapp.com/), and returned no errors.
 
@@ -126,6 +127,8 @@ Before the code was deployed, the Python code was linked to Google Sheets spread
 ![String literal displaying improperly.](./assets/images/string-issue.png)
 
 After deployment, it was found that the game_over_lose() function prevents the color copy for the final opponent that takes you last health point away from displaying. An additional call for and change to the continue_game() were made to improve the function timing and show the result of the encounter before showing the user that the game is lost.
+
+After deoloyment and testing, an additional function was added that would give the user a hint after every third turn. This function would work properly most of the time, but occasionally would crash the app. The code randomly selects a row or position that aren't included in the doordinates by determining the length of the list or remaining values, and calculating a random.randint() of a range of that length. Troubleshooting found that while the range started at 0 index, the range could extend to an index of 1 past the end of the list because it wasn't adjusted to match the position indexes starting at 0. Added a -1 to the range calculation in the code, and the function works properly and consistently.
 
 ## Unfixed bugs
 
