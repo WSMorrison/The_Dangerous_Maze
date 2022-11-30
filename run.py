@@ -26,7 +26,9 @@ attempts = 0
 turn = 0
 selected_pos = 0
 calc_oppo = 0
+exit_pos = 0
 selected_row = ''
+exit_row = ''
 user_door = []
 exit_door = []
 guessed_doors = []
@@ -213,11 +215,11 @@ def start_game():
     """
     clear_screen()
     print('\nWelcome to...    ___')
-    print(' |The\\   |   \\  /   |')
-    print(' | |\\ \\  | |\\ \\/ /| |')
-    print(' | Dangerous!   Maze!')
-    print(' | |/ /  | |  \\/  | |')
-    print(' |___/   |_|      |_|')
+    print(' |The\\  |   \\  /   |')
+    print(' | |\\ \\ | |\\ \\/ /| |')
+    print(' | Dangerous!  Maze!')
+    print(' | |/ / | |  \\/  | |')
+    print(' |___/  |_|      |_|')
     print('')
     print('\nPlay the game?')
 
@@ -268,7 +270,7 @@ def first_render():
     """
     Does the initial gameboard render.
     """
-    global health_points, turn, board, exit_door
+    global health_points, turn, board, exit_row, exit_pos, exit_door
     health_points = 5
     turn = 1
     exit_row = chr(random.randint(65, 69))
@@ -325,6 +327,33 @@ def door_pos():
         input_attempts('pos')
 
 
+def give_hint():
+    """
+    Gives user a hint after every third turn.
+    """
+    hint_row = ['A', 'B', 'C', 'D', 'E']
+    hint_pos = [1, 2, 3, 4, 5]
+    hint_row.remove(exit_row)
+    hint_pos.remove(exit_pos)
+    len_row = len(hint_row) - 1
+    len_pos = len(hint_pos) - 1
+    if len_pos > 0:
+        if turn % 2 == 0:
+            hint = hint_row[random.randint(0, (len_row))]
+            print(f'You see an old sign that says "Row {hint} leads to doom!')
+            hint_row.remove(hint)
+        elif turn % 2 == 1:
+            hint = hint_pos[random.randint(0, (len_pos))]
+            print(f'A carving in the wall reads "Fear position {hint}!')
+            hint_pos.remove(hint)
+        else:
+            error_end()
+    elif len_pos == 0:
+        print('You see an old sign but the writing is illegible.')
+    else:
+        error_end()
+
+
 def get_door():
     """
     User selects door to open
@@ -333,6 +362,9 @@ def get_door():
     board_render()
     print()
     print('You are in the maze.')
+    if turn > 1:
+        if (turn - 1) % 3 == 0:
+            give_hint()
     print('\nSelect a door.')
     door_row()
     door_pos()
@@ -368,7 +400,7 @@ def check_door():
     """
     global user_door, exit_door, guessed_doors
     # Following function is diagnostic only.
-    # diagnostic_prints()
+    diagnostic_prints()
     indicate_door()
     if user_door == exit_door:
         game_over_win()
@@ -432,7 +464,7 @@ def dice_roll():
         outcome_string = string_debracketer(calc_string)
         print(outcome_string)
         print(f'You lose one health point! You now have {health_points}.')
-        print('\nChoose another door?')
+        print('\nContinue?')
     elif roll == 5:
         board_render()
         print()
@@ -441,7 +473,7 @@ def dice_roll():
         outcome_string = string_debracketer(calc_string)
         print(outcome_string)
         print(f'Your health points remain the same. You have {health_points}.')
-        print('\nChoose another door?')
+        print('\nContinue?')
     elif roll == 6:
         health_points = health_points + 1
         board_render()
@@ -451,7 +483,7 @@ def dice_roll():
         outcome_string = string_debracketer(calc_string)
         print(outcome_string)
         print(f'You gain one health point! You now have {health_points}.')
-        print('\nChoose another door?')
+        print('\nContinue?')
     else:
         input_attempts('roll')
     turn = turn + 1

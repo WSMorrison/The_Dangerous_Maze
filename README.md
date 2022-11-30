@@ -125,7 +125,7 @@ Before the code was deployed, the Python code was linked to Google Sheets spread
 
 ![String literal displaying improperly.](./assets/images/string-issue.png)
 
-After deployment, it was found that the game_over_lose() function prevents the color copy for the final opponent that takes you last hitpoint away from displaying. Added an additional call for and changed the continue_game() to improve the function timing and show the result of the encounter before showing the user that the game is lost.
+After deployment, it was found that the game_over_lose() function prevents the color copy for the final opponent that takes you last health point away from displaying. An additional call for and change to the continue_game() were made to improve the function timing and show the result of the encounter before showing the user that the game is lost.
 
 ## Unfixed bugs
 
