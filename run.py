@@ -38,6 +38,8 @@ no_change_list = []
 run_away_list = []
 plus_one_list = []
 opponents_past = []
+hint_row = []
+hint_pos = []
 board = {}
 
 
@@ -189,8 +191,7 @@ def give_hint():
     """
     Gives user a hint after every third turn.
     """
-    hint_row = ['A', 'B', 'C', 'D', 'E']
-    hint_pos = [1, 2, 3, 4, 5]
+    global hint_row, hint_pos
     hint_row.remove(exit_row)
     hint_pos.remove(exit_pos)
     len_row = len(hint_row) - 1
@@ -333,9 +334,11 @@ def first_render():
     """
     Does the initial gameboard render.
     """
-    global health_points, turn, board, exit_row, exit_pos, exit_door
+    global health_points, turn, board, exit_row, exit_pos, exit_door, hint_row, hint_pos
     health_points = 5
     turn = 1
+    hint_row = ['A', 'B', 'C', 'D', 'E']
+    hint_pos = [1, 2, 3, 4, 5]
     exit_row = chr(random.randint(65, 69))
     exit_pos = random.randint(1, 5)
     exit_door = [exit_row, exit_pos]
@@ -437,7 +440,7 @@ def check_door():
     """
     global user_door, exit_door, guessed_doors
     # Following function is diagnostic only.
-    diagnostic_prints()
+    # diagnostic_prints()
     indicate_door()
     if user_door == exit_door:
         game_over_win()

@@ -134,6 +134,8 @@ After deployment, it was found that the game_over_lose() function prevents the c
 
 After deoloyment and testing, an additional function was added that would give the user a hint after every third turn. This function would work properly most of the time, but occasionally would crash the app. The code randomly selects a row or position that aren't included in the doordinates by determining the length of the list or remaining values, and calculating a random.randint() of a range of that length. Troubleshooting found that while the range started at 0 index, the range could extend to an index of 1 past the end of the list because it wasn't adjusted to match the position indexes starting at 0. Added a -1 to the range calculation in the code, and the function works properly and consistently.
 
+After deployment, during testing the give_hint() function was found to have a bug that didn't exclude previous hints from being suggested to the user. Troubleshooting found that developer stupidly set the initial hint_row and hint_pos list values inside the give_hint() function, so they were reset every time the function was called. Moved the initial value setting to the first_render() function so they would be set once and changed as game play continued.
+
 ## Unfixed bugs
 
 There is a bug where the global attempts variable resets between most functions, but not between the door_row() and door_pos() functions. This means that the user has a combined 5 attempts to input good values for the door row and the door position.
