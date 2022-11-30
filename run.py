@@ -260,7 +260,6 @@ def game_over_win():
     print('\n*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
     print('You win! You escape the maze!')
     print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n')
-    play_again()
     print('\nPlay again?')
     continue_game('over')
 
