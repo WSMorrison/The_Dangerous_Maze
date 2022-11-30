@@ -192,8 +192,6 @@ def give_hint():
     Gives user a hint after every third turn.
     """
     global hint_row, hint_pos
-    hint_row.remove(exit_row)
-    hint_pos.remove(exit_pos)
     len_row = len(hint_row) - 1
     len_pos = len(hint_pos) - 1
     if len_pos > 0:
@@ -342,6 +340,8 @@ def first_render():
     exit_row = chr(random.randint(65, 69))
     exit_pos = random.randint(1, 5)
     exit_door = [exit_row, exit_pos]
+    hint_row.remove(exit_row)
+    hint_pos.remove(exit_pos)
     board = {'A': [1, 2, 3, 4, 5], 'B': [1, 2, 3, 4, 5],
              'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
     board_render()
