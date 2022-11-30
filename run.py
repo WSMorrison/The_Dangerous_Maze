@@ -35,6 +35,7 @@ guessed_doors = []
 opponents_list = []
 minus_one_list = []
 no_change_list = []
+run_away_list = []
 plus_one_list = []
 opponents_past = []
 board = {}
@@ -253,7 +254,7 @@ def game_over_win():
     board_render()
     print('\n*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
     print('You win! You escape the maze!')
-    print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
+    print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n')
     exit()
 
 
@@ -265,7 +266,7 @@ def game_over_lose():
     board_render()
     print('\n*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
     print('You lose! You did not escape!')
-    print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*')
+    print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n')
     exit()
 
 
@@ -320,11 +321,12 @@ def get_opponents():
     Get the copy for opponents and outcomes from
     Google Sheets hosted spreadsheet.
     """
-    global opponents_list, minus_one_list, no_change_list, plus_one_list
+    global opponents_list, minus_one_list, no_change_list, plus_one_list, run_away_list
     opponents_list = SHEET.worksheet('opponents').get_all_values()
     minus_one_list = SHEET.worksheet('minus_one').get_all_values()
     no_change_list = SHEET.worksheet('no_change').get_all_values()
     plus_one_list = SHEET.worksheet('plus_one').get_all_values()
+    run_away_list = SHEET.worksheet('run_away').get_all_values()
 
 
 def first_render():
@@ -473,7 +475,7 @@ def oppo_or_not():
         literal_string = string_debracketer(calc_string)
         print('There is an opponent!')
         print(f'You have encountered {literal_string}')
-        print('\nReady to battle?')
+        print('\nDo you want to fight?')
         continue_game('dice')
     elif roll == 6:
         print('Room is empty! Get back out there.')
@@ -541,8 +543,11 @@ def run_away():
         clear_screen()
         board_render()
         health_points = health_points - 1
-        print('\nYou smash your hand in the door. Lose 1 health point.')
-        print(f'You now have {health_points} health points.')
+        calc_string = run_away_list[calc_oppo]
+        outcome_string = string_debracketer(calc_string)
+        print()
+        print(outcome_string)
+        print(f'You lose one health point. You now have {health_points}.')
         print('\nContinue?')
     elif roll == 1:
         if health_points == 1:
@@ -551,8 +556,11 @@ def run_away():
             health_points = health_points - 2
         clear_screen()
         board_render()
-        print('\nYou slip in a pool of acid. Lose 2 health points.')
-        print(f'You now have {health_points} health points.')
+        calc_string = run_away_list[calc_oppo]
+        outcome_string = string_debracketer(calc_string)
+        print()
+        print(outcome_string)
+        print(f'You lose 2 health points. You now have {health_points}.')
         print('\nContinue?')
     else:
         input_attempts('run')
