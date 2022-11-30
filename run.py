@@ -262,7 +262,7 @@ def game_over_win():
     print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n')
     play_again()
     print('\nPlay again?')
-    continue_game(over)
+    continue_game('over')
 
 
 def game_over_lose():
@@ -275,7 +275,7 @@ def game_over_lose():
     print('You lose! You did not escape!')
     print('*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n')
     print('\nPlay again?')
-    continue_game(over)
+    continue_game('over')
 
 
 # Game play functions ---------------------------------------------------
