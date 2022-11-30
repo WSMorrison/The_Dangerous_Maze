@@ -537,7 +537,9 @@ def run_away():
     if roll > 2:
         clear_screen()
         board_render()
-        print('\nYou quickly slam the door and run, hopefully undetected.')
+        print()
+        print(f'You rolled a {roll}.')
+        print('You quickly slam the door and run, hopefully undetected.')
         print('\nContinue?')
     elif roll == 2:
         clear_screen()
@@ -546,6 +548,7 @@ def run_away():
         calc_string = run_away_list[calc_oppo]
         outcome_string = string_debracketer(calc_string)
         print()
+        print(f'You rolled a {roll}.')
         print(outcome_string)
         print(f'You lose one health point. You now have {health_points}.')
         print('\nContinue?')
@@ -559,6 +562,7 @@ def run_away():
         calc_string = run_away_list[calc_oppo]
         outcome_string = string_debracketer(calc_string)
         print()
+        print(f'You rolled a {roll}.')
         print(outcome_string)
         print(f'You lose 2 health points. You now have {health_points}.')
         print('\nContinue?')

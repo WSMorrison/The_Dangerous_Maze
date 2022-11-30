@@ -15,7 +15,7 @@ Porfolio Project 3, Python Essentials.
 
 # Rationale
 
-The Portfolio Project 3 is a terminal based, Python project. It was decided that this format was perfect for a program similar to the text-based, dice-rolling, role-playing adventure games from the developer's childhood before GUI were common. 
+The Portfolio Project 3 is a terminal based Python project. It was decided that this format was perfect for a program similar to the text-based, dice-rolling, role-playing adventure games from the developer's childhood before GUI were common. 
 
 The purpose of this project is to display the developer's ability to program a Command Line Interface based program. The game will play with simple keyboard based commands, allowing the user to select whether they want to continue or quit, and the user can select positions on a grid that may trigger an opponent or not, and the user will benefit from a simulated dice roll that will decide the outcome of any opponent encounter. The encounters can result in the loss or gain of a health point, and if the user's health points run out before they find the exit they lose.
 
@@ -100,6 +100,10 @@ When the code was deployment ready, it was deployed in Heroku by following these
 
 - The code tracks which opponents have been called and excludes them from duplicate selection.
 - There is a system of hints that will give the user a hint about which row or position the exit door is not in after each third turn. The function tracks which hints were given so there will be no duplicate hints.
+- There is a functionality that allows the user to input N when asked to fight. This allows the user to not fight the opponent. A simulated D6 is rolled to determine the outcome.
+    - A roll of 3-6 allows the user to escape without losing a health point.
+    - A roll of 2 will cost the user 1 health point.
+    - If a 1 is rolled, the user will lose two health points.
 - The code clears the screen and rebuilds the game board at each input to maintain a clean look.
 
 # Testing
@@ -108,7 +112,7 @@ The game was tested in Gitpod during development, to maintain continuity of func
 
 There is a diagnostic function in the code, the call for it commented out. It allows the developer and subsequent developers to view the user selected door position, the winning door position, and all previously selected positions. With this function enabled, a developer can see what's going on and quickly test changes in the code by accessing or avoiding the winning position. This code is intentionally left in, because it may be useful for assessors as well!
 
-After deployment, the app was shared with friends, family, and Code Institute classmates to test the code. The game was remarked to be frustrating more than difficult, so two new functions were added to help the user play the game more efficiently. The first added function was a hint that gives the user a row or position the exit door is not in after every third turn. A second function....
+After deployment, the app was shared with friends, family, and Code Institute classmates to test the code. The game was remarked to be frustrating more than difficult, so two new functions were added to help the user play the game more efficiently. The first added function was a hint that gives the user a row or position the exit door is not in after every third turn. A second functionality gives the user the opportunity to not battle the opponent, allowing them to choose N giving them a 2/3 chance of losing no health points, but the possibilty of losing up to two. This also comes with copy to reflect the decision based on which opponent they discovered behind the door.
 
 Code was copy and pasted into the [Code Institute Python Linter](https://pep8ci.herokuapp.com/), and returned no errors.
 
