@@ -139,7 +139,7 @@ def continue_game(next_function):
             get_door()
         elif next_function == 'over':
             clear_screen()
-            print('\nUntil the next cave, goodbye!')
+            print('\nUntil the next cave, goodbye!\n')
             exit()
         else:
             clear_screen()
@@ -243,8 +243,8 @@ def error_end():
     Ends game due to an error.
     """
     print('\nThere was an unrecoverable error.')
-
-    game_quit()
+    print("\nWe're sorry. Please try again later.\n")
+    exit()
 
 
 def n_quit():
@@ -346,6 +346,10 @@ def get_opponents():
     no_change_list = SHEET.worksheet('no_change').get_all_values()
     plus_one_list = SHEET.worksheet('plus_one').get_all_values()
     run_away_list = SHEET.worksheet('run_away').get_all_values()
+    if len(opponents_list) != 25:
+        clear_screen()
+        print('\nError loading files. Check internet connection.')
+        error_end()
 
 
 def first_render():
@@ -460,7 +464,7 @@ def check_door():
     Checks if user guessed the exit door.
     """
     global user_door, exit_door, guessed_doors
-    # Following function is diagnostic only.
+    # Following function call is diagnostic only.
     # diagnostic_prints()
     indicate_door()
     if user_door == exit_door:

@@ -85,6 +85,19 @@ When the code was deployment ready, it was deployed in Heroku by following these
     - Deploy Branch was selected for the initial deployment.
 - When Heroku successfully deployed the App, the deployment was checked and tested.
 
+## Defensive Code
+
+- The code is written to defend against bad or empty user input strings. It adds a arbitrary character to the string, shortens the string to just the first character, and changes the character to uppercase before checking it against possible options.
+- The code also only gives the user 5 chances to input a good character. This prevents the program looping inadvertently. After the fifth attempt, the game will error and exit.
+- The code also will give itself 5 chances to generate a value on it's own. This will also error and end the program.
+- When the code isn't generating but passing or calculating a value, if the value is not good, the code will error and end the program.
+- If the app fails to load the values from Google Sheets hosted spreadsheets, the game will error and end.
+
+## Developer Notes
+
+- There is a built in function, diagnostic_prints(), that is called in the check_door() function at line 468. If you remove the comment hashtag, this function will display the last user input door selection, the generated exit door coordinates, and a list of all the previously user selected doors. The information will be displayed immediately after the user input the door selection, and allows a developer user to make sure functions are working properly, as well as see what the exit door position is so it can be selected or avoided as part of diagnostics. This function is intentionally left in.
+- If the list of opponents is increased, there is only one place that the code must be changed. In the get_opponents() function, the if: statement checks that the opponents list imported from Google Sheets contains 25 strings. The number 25 on line 349 will need to be changed to a number to correctly reflect the number of opponents on the spreadsheet. This logic is meant to be defensive in case the Google hosted spreadsheet is inacessible or corrupted. The logic could have been made to see if there were more than zero, but the developer decided an exact equal to the length of the list would help prevent unauthorized changes to the list as well.
+
 # Features
 
 - The game shows a pair of screens that explain the game, using a "...loading..." message to give the user time to read the rules, and time for the game to get the color copy from Google Sheets.
@@ -92,6 +105,7 @@ When the code was deployment ready, it was deployed in Heroku by following these
 ![Rules screens.](./assets/images/rules.png)
 
 - The game displays a game board showing rows of doors and selectable positions on each row.
+- There is defensive code that prevents the game from playing if it cannot load the Google spreadsheet.
 - Health points are displayed throughout gameplay and remain accurate as gameplay advances.
 - A turn counter maintains a count of user turns and indicates how long they have lasted.
 - The game changes positions to a 0 instead of a position number to indicate that it was selected.
