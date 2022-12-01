@@ -109,7 +109,7 @@ def continue_game(next_function):
         elif next_function == 'scared':
             game_over_lose()
         elif next_function == 'over':
-            start_game()
+            first_render()
         else:
             error_end()
     elif play == 'N':
@@ -344,10 +344,12 @@ def first_render():
     """
     Does the initial gameboard render.
     """
-    global health_points, turn, board, exit_row, \
-        exit_pos, exit_door, hint_row, hint_pos
+    global health_points, turn, board, exit_row, opponents_past
+    global exit_pos, exit_door, hint_row, hint_pos, guessed_doors
     health_points = 5
     turn = 1
+    guessed_doors = []
+    opponents_past = []
     hint_row = ['A', 'B', 'C', 'D', 'E']
     hint_pos = [1, 2, 3, 4, 5]
     exit_row = chr(random.randint(65, 69))

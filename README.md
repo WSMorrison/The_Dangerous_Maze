@@ -162,6 +162,8 @@ Based on feedback from testers, an additional function was added that would give
 
 After deployment, during testing the give_hint() function was found to have a bug that didn't exclude previous hints from being suggested to the user. Troubleshooting found that developer stupidly set the initial hint_row and hint_pos list values inside the give_hint() function, so they were reset every time the function was called. The developer moved the initial value setting to the first_render() function so they would be set once and changed as game play continued.
 
+During final testing after revisions, a bug was found that didn't allow the user to select certain positions when they chose Y to playing again after their last game. Troubleshooting indicated that the game did not reset the guessed_doors variable. Further inquiry revealed that the opponents_past variable wasn't reset either, and testing verified that if the user played through 25 turns across multiple games, the game would crash by running out of opponents imported from the Google Sheet. Reset both of these variables in the first_render() function. Game works properly and can be played indefinitely by choosing to play again, and not quitting or N-ing out of the game.
+
 ## Unfixed bugs
 
 There is a bug where the global attempts variable resets between most functions, but not between the door_row() and door_pos() functions. This means that the user has a combined 5 attempts to input good values for the door row and the door position.
