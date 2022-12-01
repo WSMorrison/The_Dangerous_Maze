@@ -60,6 +60,10 @@ def short_string(string):
 def string_debracketer(string):
     """
     Removes brackets from inported strings.
+
+    This short code is almost identical to code suggested
+    in the bobbyhadz.com reference material identified
+    in the README.md file.
     """
     no_brackets = ', '.join(string)
     return no_brackets
@@ -68,6 +72,10 @@ def string_debracketer(string):
 def clear_screen():
     """
     Clears the screen, often used between rendering text.
+
+    This short code is almost identical to the code suggested
+    in the geeksforgeeks.org reference material
+    identified in the README.md file.
     """
     if name == 'nt':
         _ = system('cls')
@@ -78,7 +86,7 @@ def clear_screen():
 def diagnostic_prints():
     """
     Code that allows the user to see the doors selected
-    as well as the winning door for code testing use.
+    as well as the winning door for CODE DIAGNOSTIC USE.
     """
     print('Diagnostics:\n')
     print(f'User door: {user_door}')
@@ -89,7 +97,7 @@ def diagnostic_prints():
 
 def continue_game(next_function):
     """
-    Y/N/E input asking user if user wants
+    Y/N/Q input asking user if user wants
     to advance to the next activity.
     """
     global attempts
@@ -185,7 +193,7 @@ def input_attempts(next_function):
 
 def board_render():
     """
-    Renders game board
+    Renders game board.
     """
     print()
     print(f'HP: {health_points}         Turn: {turn}')
@@ -218,6 +226,10 @@ def give_hint():
 
 
 def stay_in_hall():
+    """
+    Verifies user would like to quit 
+    when they choose not to advance.
+    """
     clear_screen()
     board_render()
     print('\nIf you choose no doors, you have no chance for escape.')
@@ -283,7 +295,8 @@ def start_game():
     Introduces game and passes user to begin_game function.
     """
     clear_screen()
-    print('\nWelcome to...    ___')
+    print('\nWelcome to...\n')
+    print('  ___    ___    ___')
     print(' |The\\  |   \\  /   |')
     print(' | |\\ \\ | |\\ \\/ /| |')
     print(' | Dangerous!  Maze!')
@@ -299,25 +312,23 @@ def game_rules():
     """
     Explains game rules, gets user name, and begins gameplay.
     """
-    print()
-    print('When prompted, select a door by')
-    print('entering coordinates like "A 3"\n')
-    print('You have 5 health points to escape!')
+    print('\nYou will start with 5 health points!\n')
+    print('Open a door by entering coordinates like "A, 3."\n')
     print('Opening a door may reveal the escape,')
-    print('the room behind the door may be empty,')
-    print('or you may find an oppenent behind it!\n')
-    print('If you find an opponent...')
-    print('\n...loading...')
+    print('Or you may encounter a monster!')
+    print('If you encounter a monster,')
+    print('you can choose to fight or flee.')
+    print('If you choose to fight....')
+    print('\n...Loading...')
     get_opponents()
     sleep(5)
     clear_screen()
-    print()
-    print('If you find an opponent,')
+    print('\nIf you choose to fight...')
     print('you will get to roll a D6.\n')
-    print('Roll a 1-4, you lose a health point!')
-    print('Roll a 5, you escape unscathed,')
-    print('and if you manage to roll a 6,')
-    print('one health point will be restored.')
+    print('Roll a 5 to escape, 6 restores a health point,')
+    print('but roll 1-4 and you will lose a health pint!')
+    print('\nIf you choose to flee, 1-4 means escape,')
+    print('but failure can be dire!')
     print('\nAre you ready to play the game?')
 
     continue_game('first')
@@ -328,7 +339,8 @@ def get_opponents():
     Get the copy for opponents and outcomes from
     Google Sheets hosted spreadsheet.
     """
-    global opponents_list, minus_one_list, no_change_list, plus_one_list, run_away_list
+    global opponents_list, minus_one_list, \
+        no_change_list, plus_one_list, run_away_list
     opponents_list = SHEET.worksheet('opponents').get_all_values()
     minus_one_list = SHEET.worksheet('minus_one').get_all_values()
     no_change_list = SHEET.worksheet('no_change').get_all_values()
@@ -340,7 +352,8 @@ def first_render():
     """
     Does the initial gameboard render.
     """
-    global health_points, turn, board, exit_row, exit_pos, exit_door, hint_row, hint_pos
+    global health_points, turn, board, exit_row, \
+        exit_pos, exit_door, hint_row, hint_pos
     health_points = 5
     turn = 1
     hint_row = ['A', 'B', 'C', 'D', 'E']
@@ -351,7 +364,7 @@ def first_render():
     hint_row.remove(exit_row)
     hint_pos.remove(exit_pos)
     board = {'A': [1, 2, 3, 4, 5], 'B': [1, 2, 3, 4, 5],
-             'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
+        'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
     board_render()
     print()
     print('Behind these doors is an opponent,')
@@ -457,19 +470,6 @@ def check_door():
         oppo_or_not()
 
 
-def which_opponent():
-    """
-    Decides which opponent copy to select from
-    spreadsheet, while ensuring no duplicates.
-    """
-    global opponents_past, calc_oppo
-    calc_oppo = random.randint(0, 24)
-    if calc_oppo in opponents_past:
-        which_opponent()
-    else:
-        opponents_past.append(calc_oppo)
-
-
 def oppo_or_not():
     """
     Decides if there is an opponent behind the door,
@@ -497,46 +497,17 @@ def oppo_or_not():
         input_attempts('oppo')
 
 
-def dice_roll():
+def which_opponent():
     """
-    Rolls the D6.
+    Decides which opponent copy to select from
+    spreadsheet, while ensuring no duplicates.
     """
-    global health_points, attempts, turn
-    roll = random.randint(1, 6)
-    if roll < 5:
-        health_points = health_points - 1
-        board_render()
-        print()
-        print(f'You rolled a {roll}.')
-        calc_string = minus_one_list[calc_oppo]
-        outcome_string = string_debracketer(calc_string)
-        print(outcome_string)
-        print(f'You lose one health point! You now have {health_points}.')
-        print('\nContinue?')
-    elif roll == 5:
-        board_render()
-        print()
-        print(f'You rolled a {roll}.')
-        calc_string = no_change_list[calc_oppo]
-        outcome_string = string_debracketer(calc_string)
-        print(outcome_string)
-        print(f'Your health points remain the same. You have {health_points}.')
-        print('\nContinue?')
-    elif roll == 6:
-        health_points = health_points + 1
-        board_render()
-        print()
-        print(f'You rolled a {roll}.')
-        calc_string = plus_one_list[calc_oppo]
-        outcome_string = string_debracketer(calc_string)
-        print(outcome_string)
-        print(f'You gain one health point! You now have {health_points}.')
-        print('\nContinue?')
+    global opponents_past, calc_oppo
+    calc_oppo = random.randint(0, 24)
+    if calc_oppo in opponents_past:
+        which_opponent()
     else:
-        input_attempts('roll')
-    turn = turn + 1
-
-    did_you_die_though()
+        opponents_past.append(calc_oppo)
 
 
 def run_away():
@@ -579,6 +550,48 @@ def run_away():
         print('\nContinue?')
     else:
         input_attempts('run')
+    turn = turn + 1
+
+    did_you_die_though()
+
+
+def dice_roll():
+    """
+    Rolls the D6.
+    """
+    global health_points, attempts, turn
+    roll = random.randint(1, 6)
+    if roll < 5:
+        health_points = health_points - 1
+        board_render()
+        print()
+        print(f'You rolled a {roll}.')
+        calc_string = minus_one_list[calc_oppo]
+        outcome_string = string_debracketer(calc_string)
+        print(outcome_string)
+        print(f'You lose one health point! You now have {health_points}.')
+        print('\nContinue?')
+    elif roll == 5:
+        board_render()
+        print()
+        print(f'You rolled a {roll}.')
+        calc_string = no_change_list[calc_oppo]
+        outcome_string = string_debracketer(calc_string)
+        print(outcome_string)
+        print(f'Your health points remain the same. You have {health_points}.')
+        print('\nContinue?')
+    elif roll == 6:
+        health_points = health_points + 1
+        board_render()
+        print()
+        print(f'You rolled a {roll}.')
+        calc_string = plus_one_list[calc_oppo]
+        outcome_string = string_debracketer(calc_string)
+        print(outcome_string)
+        print(f'You gain one health point! You now have {health_points}.')
+        print('\nContinue?')
+    else:
+        input_attempts('roll')
     turn = turn + 1
 
     did_you_die_though()
