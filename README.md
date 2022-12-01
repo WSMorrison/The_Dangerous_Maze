@@ -1,12 +1,12 @@
 # The Dangerous Maze
 
-Porfolio Project 3, Python Essentials.
+Portfolio Project 3, Python Essentials.
 
 ## Program links
 
 - [Github repository](https://github.com/WSMorrison/The_Dangerous_Maze)
 - [Heroku Overview](https://dashboard.heroku.com/apps/the-dangerous-maze)
-- [Deployed app](https://the-dangerous-maze.herokuapp.com/)
+- [Deployed App](https://the-dangerous-maze.herokuapp.com/)
 
 ![Welcome screen for The Dangerous Maze.](./assets/images/title_screen.png)
 
@@ -19,13 +19,13 @@ The Portfolio Project 3 is a terminal based Python project. It was decided that 
 
 The purpose of this project is to display the developer's ability to program a Command Line Interface based program. The game will play with simple keyboard based commands, allowing the user to select whether they want to continue or quit, and the user can select positions on a grid that may trigger an opponent or not, and the user will benefit from a simulated dice roll that will decide the outcome of any opponent encounter. The encounters can result in the loss or gain of a health point, and if the user's health points run out before they find the exit they lose.
 
-The program will exhibit understanding of the Python pogramming language, functions, nested functions, data type, nested data types, methods, object oriented programming, API usage, and deployment strategies. It will also incorporate defensive design, well organized code, and easily readable and understandable user interface.
+The program will exhibit understanding of the Python pogramming language, functions, nested functions, data types, nested data types, methods, object oriented programming, API usage, and deployment strategies. It will also incorporate defensive design, well organized code, and easily readable and understandable user interface.
 
 # User Experience
 
 ## Project Targets
 
-- The game will be able to be played on a computer browser.
+- The game will be able to be played on a computer browser, in a virtual terminal.
 - The game will accept user input.
 - The game will react to user inputs, rejecting bad or duplicate inputs in a pleaseing way.
 - The game will progress in a logical way, and indicate previous guesses.
@@ -38,13 +38,13 @@ The outcome of this project will be a playable, terminal based, command line int
 
 ## Planning
 
-After developing a concept for the game, developer made a list of functions that would probably be required as an outline for the project. These function concepts were put into a flowchart to help conceptualize the flow of the game. 
+After developing a concept for the game, the developer made a list of functions that would probably be required as an outline for the project. These function concepts were put into a flowchart to help conceptualize the flow of the game. 
 
 ![Flowchart of a very early draft of the game concept.](./assets/images/flowchart.png)
 
-Ultimately, it was decided that an outline formatted list of the functions was more helpful. Though the flow lines were not available, it was easy enough for this logic to be understood in an outline. The functions were written in order they would be called, and when the functions needed additional functionality they were split into multiple functions to be called. This was also helpful in refactoring, giving the developer a good idea of when functions would have smaller components that would be reused in other functions.
+In the outline, he functions were written in order they would be called. When the functions needed additional functionality they were split into multiple functions to be called. This was also helpful in refactoring, giving the developer a good idea of when functions would have smaller components that would be reused in other functions.
 
-There many more functions required than were initially outlined and included in the flowchart. This continued planning was done in situ, and developed directly into code and development progressed. There were also user selected quit options throughout the game, so that the user could quit at any point and keeping the game from being just a convoluted loop trapping the user.
+Ultimately, there were many more functions required than were initially outlined and included in the flowchart. This continued planning was done in situ, and developed directly into code as development progressed. There were also user selected quit options throughout the game instead of just the one, so that the user could quit at any point.
 
 ## Design
 
@@ -60,13 +60,13 @@ The program is written in the Python programming language. [Python](https://www.
 
 - The program was built on the Code Institute Python Essentials Template. Available on request.
 - The program uses Google Sheets for spreadsheet hosting. [Google Sheets](https://www.google.com/sheets/about/)
-- The spreadsheets are accessed using a credentials and API provided by Google Sheets.
+- The spreadsheets are accessed using credentials and an API provided by Google Sheets.
 - The spreadsheets are interpreted for Python using Gspread. [gspread](https://docs.gspread.org/en/v5.7.0/)
 - Python imports modules from the time and math libraries, and the user's operating system.
 
 ## Deployment
 
-- Code was written and version control maintained in GitHub. [Github](https://github.com/)
+- Code was written and version control was maintained in GitHub. [Github](https://github.com/)
 - The game was deployed as an app using Heroku. [Heroku](https://www.heroku.com/)
 
 When the code was deployment ready, it was deployed in Heroku by following these steps as outlined in the Code Institute Love Sandwiches Walkthrough Project, Deployment, Deploying our Project Part 1 and Part 2 lessons:
@@ -75,7 +75,7 @@ When the code was deployment ready, it was deployed in Heroku by following these
 - A requirements.txt file was made to give Heroku the dependencies required by the program. This was done by issuing the command "pip3 freeze > requirements.txt" in the Gitpod terminal.
 - In the Heroku dashboard, a new app was created.
 - In the new app's page, the settings tab was selected, and the following settings were set:
-    - A config var was set as CREDS for the key field, and the creds.json file contents copied and pasted into the value field.
+    - A config var was set as CREDS for the key field, and the creds.json file contents were copied from GitHub and pasted into the value field on Heroku.
     - A config var was set as PORT for the key field, and 8000 for the value field.
     - heroku/python Buildpack was added to the required buildpacks.
     - heroku/nodejs Buildpack was added to the required buildpacks. The buildpacks must be set in this order.
@@ -87,16 +87,11 @@ When the code was deployment ready, it was deployed in Heroku by following these
 
 ## Defensive Code
 
-- The code is written to defend against bad or empty user input strings. It adds a arbitrary character to the string, shortens the string to just the first character, and changes the character to uppercase before checking it against possible options.
+- The code is written to defend against bad or empty user input strings. It adds an arbitrary character to the string, shortens the string to just the first character, and changes the character to uppercase before checking it against possible options.
 - The code also only gives the user 5 chances to input a good character. This prevents the program looping inadvertently. After the fifth attempt, the game will error and exit.
-- The code also will give itself 5 chances to generate a value on it's own. This will also error and end the program.
+- The code will also give itself 5 chances to generate a value on it's own. This will also error and end the program.
 - When the code isn't generating but passing or calculating a value, if the value is not good, the code will error and end the program.
 - If the app fails to load the values from Google Sheets hosted spreadsheets, the game will error and end.
-
-## Developer Notes
-
-- There is a built in function, diagnostic_prints(), that is called in the check_door() function at line 468. If you remove the comment hashtag, this function will display the last user input door selection, the generated exit door coordinates, and a list of all the previously user selected doors. The information will be displayed immediately after the user input the door selection, and allows a developer user to make sure functions are working properly, as well as see what the exit door position is so it can be selected or avoided as part of diagnostics. This function is intentionally left in.
-- If the list of opponents is increased, there is only one place that the code must be changed. In the get_opponents() function, the if: statement checks that the opponents list imported from Google Sheets contains 25 strings. The number 25 on line 349 will need to be changed to a number to correctly reflect the number of opponents on the spreadsheet. This logic is meant to be defensive in case the Google hosted spreadsheet is inacessible or corrupted. The logic could have been made to see if there were more than zero, but the developer decided an exact equal to the length of the list would help prevent unauthorized changes to the list as well.
 
 # Features
 
@@ -115,35 +110,33 @@ When the code was deployment ready, it was deployed in Heroku by following these
 ![An example of defensive programming for an input line. The lowercase y will be accepted.](./assets/images/defense.png)
 
 - When the user is asked to choose a door, they can select Y/N/Q. If the user selects N for "No," the following input asks if the user is sure, which by structure reverses the Y/N choices from the standard outcomes in the rest of the game. This was questioned by a minority of testers, and left this way intentionally by the developer.
-- There is a functionality that allows the user to input N when asked to fight. This allows the user to not fight the opponent. A simulated D6 is rolled to determine the outcome.
+- There is a functionality that allows the user to input N when asked to fight. This allows the user to not fight the opponent. A simulated D6 is rolled to determine the outcome of fleeing, and three outcomes based on a random integer 1-6 being generated by the code, or "rolled."
     - A roll of 3-6 allows the user to escape without losing a health point.
     - A roll of 2 will cost the user 1 health point.
     - If a 1 is rolled, the user will lose two health points.
-- The game accesses a developer expandable list of opponents for the color copy during gameplay.
+- The game accesses a developer expandable list of opponents for the color copy during gameplay. **Note:** if the list of opponents is expanded, the code in the get_opponents() function on line 337 must be changed to reflect the new number of lines in the Google Sheets hosted spreadsheet.
 - There are several opponents to encounter, and three outcomes based on a random integer 1-6 being generated by the code, or "rolled."
-    - A roll of 1-4 take a health point away from the user.
+    - A roll of 1-4 takes a health point away from the user.
     - A roll of 5 makes no change to the health points.
     - A roll of 6 restores one health point to the user.
 
 ![An example of an opponent encounter, showing examples of all three outcomes.](./assets/images/encounter.png)
 
 - The code tracks which opponents have been called and excludes them from duplicate selection.
-- There is a system of hints that will give the user a hint about which row or position the exit door is not in after each third turn. The function tracks which hints were given so there will be no duplicate hints.
+- There is a system of hints that will give the user a hint about which row or position the exit door is *not* in after each third turn. The function tracks which hints were given so there will be no duplicate hints.
 - The code clears the screen and rebuilds the game board at each input to maintain a clean look.
-- If the user loese the game, the game continues to show the result of the encounter before continuing to a user lose message.
-- The code clears the screen and rebuilds the board before showing a user win or user lose message.
-- If the game ends resulting from the user qutting or Ning out of the game, the program exits.
+- If the user loses the game, the game continues to show the result of the encounter before continuing to a user-lose message.
+- The code clears the screen and rebuilds the board before showing a user-win or user-lose message.
+- If the game ends resulting from the user qutting or N-ing out of the game, the program exits.
 - If the game ends by the user winning or losing the game, the game invites the user to play again.
 
 # Testing
 
 The game was tested in Gitpod during development, to maintain continuity of functionality and to check that each added development worked properly. 
 
-There is a diagnostic function in the code, the call for it commented out. It allows the developer and subsequent developers to view the user selected door position, the winning door position, and all previously selected positions. With this function enabled, a developer can see what's going on and quickly test changes in the code by accessing or avoiding the winning position. This code is intentionally left in, because it may be useful for assessors as well!
-
 After deployment, the app was shared with friends, family, and Code Institute classmates to test the code. The game was remarked to be frustrating more than difficult, so two new functions were added to help the user play the game more efficiently. 
  - The first added function was a hint that gives the user a row or position the exit door is not in after every third turn. 
- - A second functionality gives the user the opportunity to not battle the opponent, allowing them to choose N giving them a 2/3 chance of losing no health points, but the possibilty of losing up to two. This also comes with copy to reflect the decision based on which opponent they discovered behind the door.
+ - A second functionality gives the user the opportunity to not battle the opponent. Allowing them to choose N and run away gives them a 2/3 chance of losing no health points, but the possibilty of losing up to two. This also comes with copy to reflect the decision based on which opponent they discovered behind the door.
 
 As part of rigorous testing, data analyst Jay Tarbell was retained to simulate the outcomes of the game. Simulations were run with all relevant use decisions set to "fight," and again as all relevant decisions set to "flee." This was done to check that both options result in similar outcomes, and neither gives the user an appreciable advantage. These simulations were also run to check the parity between the user winning or losing the game. After 20,000 simulated plays of each option, the "flee" only option resulted in with a nearly perfect 50% chance of the user winning and the "fight" option resting around a 46% chance of the user winning. This indicates fairly even odds for user play before the added benefit of hints, rooms without opponents, and user strategy in picking doors. The simulation also resulted in an average of 12 turns per game, for both decisions. These were considered by the developer as appropriate for an interesting and engaging game to get varying results and repeat plays.
 
@@ -163,11 +156,11 @@ Before the code was deployed, the Python code was linked to Google Sheets spread
 
 ![String literal displaying improperly.](./assets/images/string-issue.png)
 
-After deployment, it was found that the game_over_lose() function prevents the color copy for the final opponent that takes you last health point away from displaying. An additional call for and change to the continue_game() were made to improve the function timing and show the result of the encounter before showing the user that the game is lost.
+After deployment, it was found that the game_over_lose() function prevented the color copy for the final opponent from displaying. An additional call for and change to the continue_game() were made to improve the function timing and show the result of the encounter before showing the user that the game is lost.
 
-After deoloyment and testing, an additional function was added that would give the user a hint after every third turn. This function would work properly most of the time, but occasionally would crash the app. The code randomly selects a row or position that aren't included in the doordinates by determining the length of the list or remaining values, and calculating a random.randint() of a range of that length. Troubleshooting found that while the range started at 0 index, the range could extend to an index of 1 past the end of the list because it wasn't adjusted to match the position indexes starting at 0. Added a -1 to the range calculation in the code, and the function works properly and consistently.
+Based on feedback from testers, an additional function was added that would give the user a hint after every third turn. This function would work properly most of the time, but occasionally would crash the app. The code randomly selects a row or position that isn't included in the exit coordinates by determining the length of the list or remaining values, and calculating a random.randint() of a range of that length. Troubleshooting found that while the range started at 0 index, the range could extend to an index of 1 past the end of the list because it wasn't adjusted to match the position indexes starting at 0. A "- 1" was added to the range calculation in the code, and the function works properly and consistently.
 
-After deployment, during testing the give_hint() function was found to have a bug that didn't exclude previous hints from being suggested to the user. Troubleshooting found that developer stupidly set the initial hint_row and hint_pos list values inside the give_hint() function, so they were reset every time the function was called. Moved the initial value setting to the first_render() function so they would be set once and changed as game play continued.
+After deployment, during testing the give_hint() function was found to have a bug that didn't exclude previous hints from being suggested to the user. Troubleshooting found that developer stupidly set the initial hint_row and hint_pos list values inside the give_hint() function, so they were reset every time the function was called. The developer moved the initial value setting to the first_render() function so they would be set once and changed as game play continued.
 
 ## Unfixed bugs
 
@@ -175,13 +168,13 @@ There is a bug where the global attempts variable resets between most functions,
 
 # Credits
 
-- Code Institute Python Essentials lessons for the bulk of my understanding of how Python works. [Code Institute](https://codeinstitute.net/ie/)
+- Code Institute Python Essentials lessons for the bulk of the understanding of how Python works. [Code Institute](https://codeinstitute.net/ie/)
 - Code Institute instructor Simen Daehlin for almost everything else. [Simen Daehlin Github](https://github.com/Eventyret)
-- Code Institute mentor Jubrile Akolade provided guidance on where to focus time building project and an almost infinite amount of other support.
-- All of my Code Institute UCD July 2022 cohort, who have been available to answer questions through slack.
+- Code Institute mentor Jubrile Akolade provided guidance on where to focus time building the project and an almost infinite amount of other support.
+- All of my Code Institute UCD July 2022 cohort, who have been available to answer questions through Slack.
 - Code Institute tutors accessed through the Code Institute LMS have been helpful with understanding various concepts during instruction.
 - Code to import Googles sheets is used and implemented as shown and explained in Code Institute lessons, specifically the "Love Sandwiches Walkthrough Project, Getting Set Up, Connecting to our API with Python lesson." On request.
-- The results of the Jay Tarbell generated gameplay simulations can be found [here](https://docs.google.com/spreadsheets/d/1180jEkpa869zkL5wgG-v5YNBlNztwwafCtyt_MA6_QA/edit?usp=sharing)
+- The results of the Jay Tarbell generated gameplay simulations can be found [here.](https://docs.google.com/spreadsheets/d/1180jEkpa869zkL5wgG-v5YNBlNztwwafCtyt_MA6_QA/edit?usp=sharing)
 - The code was validated using the Code Institute Python Linter. [CI Python Linter](https://pep8ci.herokuapp.com/)
 - W3Schools for help with some data structures and methods. [W3Schools](https://www.w3schools.com/python/)
 - Information on clearing the screens on different operating systems found [here.](https://www.geeksforgeeks.org/clear-screen-python/)
