@@ -36,6 +36,16 @@ The program will exhibit understanding of the Python pogramming language, functi
 
 The outcome of this project will be a playable, terminal based, command line interface game describing an adventure situation where the user encounters monsters as they try to escape a maze.
 
+## Planning
+
+After developing a concept for the game, developer made a list of functions that would probably be required as an outline for the project. These function concepts were put into a flowchart to help conceptualize the flow of the game. 
+
+![Flowchart of a very early draft of the game concept.](./assets/images/flowchart.png)
+
+Ultimately, it was decided that an outline formatted list of the functions was more helpful. Though the flow lines were not available, it was easy enough for this logic to be understood in an outline. The functions were written in order they would be called, and when the functions needed additional functionality they were split into multiple functions to be called. This was also helpful in refactoring, giving the developer a good idea of when functions would have smaller components that would be reused in other functions.
+
+There many more functions required than were initially outlined and included in the flowchart. This continued planning was done in situ, and developed directly into code and development progressed. There were also user selected quit options throughout the game, so that the user could quit at any point and keeping the game from being just a convoluted loop trapping the user.
+
 ## Design
 
 Care was taken to make the game input locations consistent as the game advances. The game uses a function to clear the screen and rebuild the displayed gameboard between user inputs, keeping the terminal tidy and readable. The game was intentionally kept with black text on the black terminal background as an homage to the early games of this type it was inspired by. 
@@ -163,5 +173,6 @@ There is a bug where the global attempts variable resets between most functions,
 - Information on clearing the screens on different operating systems found [here.](https://www.geeksforgeeks.org/clear-screen-python/)
 - Information and ideas that inspired using ASCII assigments and the random.randint() method in a specific range to return a random letter was found [here.](https://stackoverflow.com/questions/2823316/generate-a-random-letter-in-python)
 - Information on using the .join() method to creat strings free of brackets and single quotes for use as part of string literals was found [here.](https://bobbyhadz.com/blog/python-remove-square-brackets-from-list)
+- Flowchart was built in the online flowchart site Lucid. [LucidChart](https://www.lucidchart.com/pages/)
 
 For educational purposes only.

@@ -227,7 +227,7 @@ def give_hint():
 
 def stay_in_hall():
     """
-    Verifies user would like to quit 
+    Verifies user would like to quit
     when they choose not to advance.
     """
     clear_screen()
@@ -364,7 +364,7 @@ def first_render():
     hint_row.remove(exit_row)
     hint_pos.remove(exit_pos)
     board = {'A': [1, 2, 3, 4, 5], 'B': [1, 2, 3, 4, 5],
-        'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
+             'C': [1, 2, 3, 4, 5], 'D': [1, 2, 3, 4, 5], 'E': [1, 2, 3, 4, 5]}
     board_render()
     print()
     print('Behind these doors is an opponent,')
